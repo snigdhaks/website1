@@ -1,0 +1,92 @@
+[
+  {
+    "id": "1",
+    "title": "Skill Development Workshop",
+    "description": "A comprehensive workshop on enhancing professional skills including communication, time management, and problem-solving.",
+    "date": "2024-06-10",
+    "category": "Workshop",
+    "image": "https://via.placeholder.com/600x400?text=Skill+Development",
+    "details": "Learn from industry experts and develop skills that will benefit you throughout your career."
+  },
+  {
+    "id": "2",
+    "title": "Community Health Camp",
+    "description": "Free health checkup and awareness camp organized for underprivileged communities in Thrikkakara.",
+    "date": "2024-06-08",
+    "category": "Health",
+    "image": "https://via.placeholder.com/600x400?text=Health+Camp",
+    "details": "Free medical services and health education provided by volunteer doctors."
+  },
+  {
+    "id": "3",
+    "title": "Environmental Awareness Drive",
+    "description": "Initiative focused on promoting environmental consciousness and sustainable living practices.",
+    "date": "2024-05-30",
+    "category": "Environment",
+    "image": "https://via.placeholder.com/600x400?text=Environment",
+    "details": "Learn about sustainability and join us in protecting our planet."
+  },
+  {
+    "id": "4",
+    "title": "Youth Empowerment Program",
+    "description": "Mentoring and guidance program for young students to help them achieve their goals.",
+    "date": "2024-05-25",
+    "category": "Youth",
+    "image": "https://via.placeholder.com/600x400?text=Youth+Program",
+    "details": "Connect with mentors and get guidance on career and personal development."
+  },
+  {
+    "id": "5",
+    "title": "Disaster Relief Initiative",
+    "description": "Rapid response team providing aid and support to flood-affected communities.",
+    "date": "2024-05-20",
+    "category": "Relief",
+    "image": "https://via.placeholder.com/600x400?text=Disaster+Relief",
+    "details": "Our volunteers came together to provide immediate relief to affected families."
+  },
+  {
+    "id": "6",
+    "title": "Education Scholarship Distribution",
+    "description": "Awarding scholarships to meritorious students from economically weaker sections.",
+    "date": "2024-05-15",
+    "category": "Education",
+    "image": "https://via.placeholder.com/600x400?text=Scholarship",
+    "details": "Providing educational opportunities to talented students in need."
+  },
+  {
+    "id": "7",
+    "title": "Sports Mentorship Program",
+    "description": "Coaching and mentorship program for aspiring young athletes in the community.",
+    "date": "2024-05-10",
+    "category": "Sports",
+    "image": "https://via.placeholder.com/600x400?text=Sports",
+    "details": "Learn from experienced coaches and develop your sporting abilities."
+  },
+  {
+    "id": "8",
+    "title": "Digital Literacy Classes",
+    "description": "Teaching basic computer skills and digital literacy to seniors and underprivileged groups.",
+    "date": "2024-05-05",
+    "category": "Education",
+    "image": "https://via.placeholder.com/600x400?text=Digital+Literacy",
+    "details": "Bridging the digital divide through practical training sessions."
+  },
+  {
+    "id": "9",
+    "title": "Women Empowerment Workshop",
+    "description": "Dedicated program to empower women through skill development and awareness sessions.",
+    "date": "2024-04-28",
+    "category": "Women",
+    "image": "https://via.placeholder.com/600x400?text=Women+Workshop",
+    "details": "Join us in celebrating and empowering women in our community."
+  },
+  {
+    "id": "10",
+    "title": "Community Tree Planting",
+    "description": "Large-scale tree planting initiative to increase green cover in urban areas.",
+    "date": "2024-04-20",
+    "category": "Environment",
+    "image": "https://via.placeholder.com/600x400?text=Tree+Planting",
+    "details": "Contribute to a greener future by planting trees with us."
+  }
+]

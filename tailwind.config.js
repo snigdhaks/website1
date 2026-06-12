@@ -1,0 +1,71 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50: '#f0f5ff',
+          100: '#e0ebff',
+          200: '#c7d9ff',
+          300: '#a4bfff',
+          400: '#7d9dff',
+          500: '#5a7fff',
+          600: '#4a63d6',
+          700: '#3d4db8',
+          800: '#273a99',
+          900: '#1a2668',
+          950: '#0f1540',
+        },
+        gold: {
+          50: '#fef9f0',
+          100: '#fef0dc',
+          200: '#fcddb4',
+          300: '#fac989',
+          400: '#f8b063',
+          500: '#f59e3f',
+          600: '#e67c2e',
+          700: '#c45d25',
+          800: '#9e4820',
+          900: '#7d3a1a',
+          950: '#450e0a',
+        },
+        dark: {
+          50: '#f8f8f8',
+          100: '#efefef',
+          200: '#e0e0e0',
+          300: '#c5c5c5',
+          400: '#ababab',
+          500: '#888888',
+          600: '#666666',
+          700: '#4a4a4a',
+          800: '#333333',
+          850: '#2a2a2a',
+          900: '#1a1a1a',
+          950: '#0f0f0f',
+        },
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      backdropFilter: {
+        'none': 'none',
+        'blur': 'blur(10px)',
+        'blur-sm': 'blur(4px)',
+        'blur-md': 'blur(12px)',
+        'blur-lg': 'blur(20px)',
+      },
+      boxShadow: {
+        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.1)',
+        'glow': '0 0 20px rgba(245, 158, 63, 0.3)',
+        'glow-primary': '0 0 20px rgba(90, 127, 255, 0.3)',
+      },
+    },
+  },
+  plugins: [],
+}

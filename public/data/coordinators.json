@@ -1,0 +1,86 @@
+[
+  {
+    "id": "1",
+    "name": "Rahul Kumar",
+    "role": "President",
+    "department": "Computer Science",
+    "year": "Final Year",
+    "description": "Passionate about community service and leadership",
+    "image": "https://via.placeholder.com/400x400?text=Rahul+Kumar",
+    "social": {
+      "facebook": "#",
+      "instagram": "#",
+      "linkedin": "#"
+    }
+  },
+  {
+    "id": "2",
+    "name": "Priya Sharma",
+    "role": "Vice President",
+    "department": "Electronics",
+    "year": "Final Year",
+    "description": "Dedicated to organizing impactful projects",
+    "image": "https://via.placeholder.com/400x400?text=Priya+Sharma",
+    "social": {
+      "facebook": "#",
+      "instagram": "#",
+      "linkedin": "#"
+    }
+  },
+  {
+    "id": "3",
+    "name": "Aditya Patel",
+    "role": "Secretary",
+    "department": "Mechanical",
+    "year": "Third Year",
+    "description": "Organizing events and managing communications",
+    "image": "https://via.placeholder.com/400x400?text=Aditya+Patel",
+    "social": {
+      "facebook": "#",
+      "instagram": "#",
+      "linkedin": "#"
+    }
+  },
+  {
+    "id": "4",
+    "name": "Neha Singh",
+    "role": "Treasurer",
+    "department": "Civil",
+    "year": "Third Year",
+    "description": "Managing funds and resources efficiently",
+    "image": "https://via.placeholder.com/400x400?text=Neha+Singh",
+    "social": {
+      "facebook": "#",
+      "instagram": "#",
+      "linkedin": "#"
+    }
+  },
+  {
+    "id": "5",
+    "name": "Arjun Nair",
+    "role": "Public Relations",
+    "department": "Computer Science",
+    "year": "Second Year",
+    "description": "Building relationships with other clubs and organizations",
+    "image": "https://via.placeholder.com/400x400?text=Arjun+Nair",
+    "social": {
+      "facebook": "#",
+      "instagram": "#",
+      "linkedin": "#"
+    }
+  },
+  {
+    "id": "6",
+    "name": "Divya Reddy",
+    "role": "Membership Director",
+    "department": "ECE",
+    "year": "Second Year",
+    "description": "Welcoming new members and managing memberships",
+    "image": "https://via.placeholder.com/400x400?text=Divya+Reddy",
+    "social": {
+      "facebook": "#",
+      "instagram": "#",
+      "linkedin": "#"
+    }
+  }
+]

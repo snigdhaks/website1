@@ -1,0 +1,68 @@
+[
+  {
+    "id": "1",
+    "title": "Annual Rotaract Summit",
+    "description": "A comprehensive summit bringing together leaders from across Rotaract clubs to discuss service projects and leadership development.",
+    "date": "2024-07-15",
+    "time": "09:00 AM",
+    "location": "Model Engineering College, Thrikkakara",
+    "image": "https://via.placeholder.com/600x400?text=Annual+Summit",
+    "registrationLink": "#",
+    "category": "Summit"
+  },
+  {
+    "id": "2",
+    "title": "Community Cleanup Drive",
+    "description": "Join us in making a difference by cleaning up our local community and promoting environmental awareness.",
+    "date": "2024-07-22",
+    "time": "08:00 AM",
+    "location": "Thrikkakara City Center",
+    "image": "https://via.placeholder.com/600x400?text=Cleanup+Drive",
+    "registrationLink": "#",
+    "category": "Community Service"
+  },
+  {
+    "id": "3",
+    "title": "Youth Leadership Workshop",
+    "description": "Develop essential leadership skills through interactive workshops conducted by industry professionals.",
+    "date": "2024-08-05",
+    "time": "10:00 AM",
+    "location": "MEC Auditorium",
+    "image": "https://via.placeholder.com/600x400?text=Leadership+Workshop",
+    "registrationLink": "#",
+    "category": "Workshop"
+  },
+  {
+    "id": "4",
+    "title": "Educational Support Program",
+    "description": "Providing tuitions and educational support to underprivileged students in the community.",
+    "date": "2024-08-12",
+    "time": "02:00 PM",
+    "location": "Community Center, Thrikkakara",
+    "image": "https://via.placeholder.com/600x400?text=Educational+Support",
+    "registrationLink": "#",
+    "category": "Education"
+  },
+  {
+    "id": "5",
+    "title": "Fundraiser Gala Night",
+    "description": "An elegant evening to raise funds for our upcoming community projects with entertainment and networking.",
+    "date": "2024-09-01",
+    "time": "06:00 PM",
+    "location": "Hotel Grand, Kochi",
+    "image": "https://via.placeholder.com/600x400?text=Gala+Night",
+    "registrationLink": "#",
+    "category": "Fundraiser"
+  },
+  {
+    "id": "6",
+    "title": "Inter-Club Sports Tournament",
+    "description": "A fun-filled sports competition between Rotaract clubs promoting fitness and camaraderie.",
+    "date": "2024-09-15",
+    "time": "07:00 AM",
+    "location": "MEC Sports Ground",
+    "image": "https://via.placeholder.com/600x400?text=Sports+Tournament",
+    "registrationLink": "#",
+    "category": "Sports"
+  }
+]

@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap');
+
+* {
+  @apply antialiased;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-dark-950 text-gray-100;
+  font-family: 'Inter', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-dark-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-primary-500;
+}
+
+.glass-card {
+  @apply backdrop-blur-md bg-white bg-opacity-10 border border-white border-opacity-20 rounded-xl;
+}
+
+.glass-card-dark {
+  @apply backdrop-blur-md bg-dark-800 bg-opacity-50 border border-white border-opacity-10 rounded-xl;
+}
+
+.gradient-gold {
+  @apply bg-gradient-to-r from-gold-400 to-gold-500;
+}
+
+.gradient-primary {
+  @apply bg-gradient-to-r from-primary-600 to-primary-700;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600;
+}
+
+.text-gradient-primary {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-primary-600;
+}
+
+.smooth-transition {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.blur-in {
+  animation: blurIn 0.6s ease-out;
+}
+
+@keyframes blurIn {
+  from {
+    @apply opacity-0 blur-md;
+  }
+  to {
+    @apply opacity-100 blur-none;
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    @apply opacity-0 translate-y-8;
+  }
+  to {
+    @apply opacity-100 translate-y-0;
+  }
+}
+
+.scale-in {
+  animation: scaleIn 0.6s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    @apply opacity-0 scale-95;
+  }
+  to {
+    @apply opacity-100 scale-100;
+  }
+}

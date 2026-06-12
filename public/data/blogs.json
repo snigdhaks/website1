@@ -1,0 +1,68 @@
+[
+  {
+    "id": "1",
+    "title": "The Impact of Community Service on Personal Growth",
+    "author": "Rahul Kumar",
+    "date": "2024-06-15",
+    "coverImage": "https://via.placeholder.com/800x400?text=Community+Service",
+    "excerpt": "Exploring how volunteering and community service can transform individuals and create lasting positive change...",
+    "content": "# The Impact of Community Service on Personal Growth\n\nCommunity service is more than just helping others—it's a transformative journey that shapes who we are. Through our work at Rotaract Club MEC, we've seen firsthand how serving others builds character, develops leadership skills, and creates meaningful connections.\n\n## Building Character Through Service\n\nWhen you engage in community service, you're not just contributing to society. You're developing values like empathy, compassion, and integrity. These qualities stay with you throughout life.\n\n## Leadership Skills Development\n\nPlanning and executing service projects requires organization, communication, and decision-making skills—all essential components of effective leadership.\n\n## Creating Lasting Connections\n\nWorking alongside fellow volunteers creates bonds that transcend the project itself. These friendships often become lifelong relationships.\n\n## Join Us\n\nWe invite you to be part of our mission to create positive change while growing as an individual.",
+    "tags": ["community", "service", "personal-growth", "leadership"],
+    "category": "Service"
+  },
+  {
+    "id": "2",
+    "title": "Rotaract at MEC: A Year of Achievements",
+    "author": "Priya Sharma",
+    "date": "2024-06-10",
+    "coverImage": "https://via.placeholder.com/800x400?text=Achievements",
+    "excerpt": "Reflecting on our club's incredible journey this year with major projects and milestones...",
+    "content": "# Rotaract at MEC: A Year of Achievements\n\nThis year has been exceptional for our Rotaract Club. We've successfully completed numerous projects that have made a real difference in our community.\n\n## Major Milestones\n\n- Completed educational support for 150+ students\n- Organized 12 community service events\n- Raised ₹5 lakhs for various charitable causes\n- Welcomed 200+ new members\n\n## Looking Forward\n\nAs we move into the next year, we're excited about the projects ahead and the opportunity to continue serving with purpose and passion.",
+    "tags": ["achievements", "rotaract", "milestones"],
+    "category": "News"
+  },
+  {
+    "id": "3",
+    "title": "Membership Benefits: Why Join Rotaract?",
+    "author": "Aditya Patel",
+    "date": "2024-06-05",
+    "coverImage": "https://via.placeholder.com/800x400?text=Membership",
+    "excerpt": "Discover the countless benefits of joining our vibrant Rotaract community...",
+    "content": "# Membership Benefits: Why Join Rotaract?\n\nJoining Rotaract Club MEC opens doors to opportunities that shape your future.\n\n## What You Get\n\n- **Networking**: Connect with like-minded individuals passionate about service\n- **Skill Development**: Learn leadership, communication, and project management\n- **Real Impact**: Make tangible differences in people's lives\n- **Friendships**: Build lasting relationships with club members\n- **Career Growth**: Gain experience that enhances your professional profile\n\n## Join Us Today\n\nTake the first step toward becoming a leader and making a difference!",
+    "tags": ["membership", "benefits", "growth"],
+    "category": "Membership"
+  },
+  {
+    "id": "4",
+    "title": "Understanding Rotary and Rotaract Values",
+    "author": "Neha Singh",
+    "date": "2024-05-28",
+    "coverImage": "https://via.placeholder.com/800x400?text=Values",
+    "excerpt": "A deep dive into the core values that guide Rotary and Rotaract organizations worldwide...",
+    "content": "# Understanding Rotary and Rotaract Values\n\nThe four principles of Rotary form the foundation of everything we do:\n\n## Service Above Self\n\nWe prioritize the needs of others and work tirelessly to make a positive impact.\n\n## Fellowship\n\nWe build strong bonds with our members and communities through shared values and goals.\n\n## Integrity\n\nWe uphold the highest ethical standards in all our actions.\n\n## Diversity\n\nWe celebrate differences and believe that diversity strengthens our organization.",
+    "tags": ["values", "rotary", "ethics"],
+    "category": "Education"
+  },
+  {
+    "id": "5",
+    "title": "Upcoming Events: Don't Miss Out!",
+    "author": "Arjun Nair",
+    "date": "2024-05-20",
+    "coverImage": "https://via.placeholder.com/800x400?text=Events",
+    "excerpt": "A preview of exciting events planned for the coming months...",
+    "content": "# Upcoming Events: Don't Miss Out!\n\nWe have an exciting line-up of events coming up that promise to be engaging and impactful.\n\n## Mark Your Calendars\n\n- **July 15**: Annual Rotaract Summit\n- **July 22**: Community Cleanup Drive\n- **August 5**: Youth Leadership Workshop\n- **September 1**: Fundraiser Gala Night\n\nEach event offers unique opportunities to connect, learn, and contribute to meaningful causes.",
+    "tags": ["events", "upcoming", "opportunities"],
+    "category": "News"
+  },
+  {
+    "id": "6",
+    "title": "Making a Difference: Success Stories from Our Projects",
+    "author": "Divya Reddy",
+    "date": "2024-05-15",
+    "coverImage": "https://via.placeholder.com/800x400?text=Success+Stories",
+    "excerpt": "Real stories of how our community service projects have changed lives...",
+    "content": "# Making a Difference: Success Stories from Our Projects\n\n## Story 1: Educational Support\n\nThrough our educational initiative, we've helped over 150 students improve their academic performance. Many have gone on to secure admissions in prestigious institutions.\n\n## Story 2: Community Cleanup\n\nOur cleanup drives have transformed neglected public spaces into clean, welcoming areas for the community.\n\n## Story 3: Health Awareness\n\nWe've organized health camps that have reached over 500 individuals in underserved communities.\n\n## Your Story Matters\n\nJoin us and create your own success story of making a positive impact!",
+    "tags": ["success", "stories", "impact"],
+    "category": "Impact"
+  }
+]
