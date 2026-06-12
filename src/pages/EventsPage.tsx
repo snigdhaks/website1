@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { HiCalendar, HiChartBar, HiHeart, HiClock, HiLocationMarker } from 'react-icons/hi'
+import { FaTools, FaDollarSign } from 'react-icons/fa'
+import { GiMountainClimbing } from 'react-icons/gi'
 import PageHeader from '@/components/PageHeader'
 import { Section } from '@/components/Common'
 import CardGrid, { EventCard } from '@/components/Cards'
@@ -138,8 +141,8 @@ const EventsPage = () => {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-6 bg-dark-800 rounded-lg border border-white border-opacity-10">
-                <h4 className="text-lg font-semibold text-gold-400 mb-4">
-                  📅 Upcoming Events
+                <h4 className="text-lg font-semibold text-gold-400 mb-4 flex items-center gap-2">
+                  <HiCalendar /> Upcoming Events
                 </h4>
                 <p className="text-4xl font-bold text-white mb-2">
                   {upcomingEvents.length}
@@ -147,8 +150,8 @@ const EventsPage = () => {
                 <p className="text-gray-400">events planned</p>
               </div>
               <div className="p-6 bg-dark-800 rounded-lg border border-white border-opacity-10">
-                <h4 className="text-lg font-semibold text-gold-400 mb-4">
-                  📊 Past Events
+                <h4 className="text-lg font-semibold text-gold-400 mb-4 flex items-center gap-2">
+                  <HiChartBar /> Past Events
                 </h4>
                 <p className="text-4xl font-bold text-white mb-2">
                   {pastEvents.length}
@@ -164,11 +167,13 @@ const EventsPage = () => {
       <Section title="Event Categories" id="categories">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            { name: 'Summit', icon: '🏔️', color: 'from-blue-500' },
-            { name: 'Workshop', icon: '🔧', color: 'from-purple-500' },
-            { name: 'Service', icon: '❤️', color: 'from-red-500' },
-            { name: 'Fundraiser', icon: '💰', color: 'from-green-500' },
-          ].map((category, idx) => (
+            { name: 'Summit', icon: GiMountainClimbing, color: 'from-blue-500' },
+            { name: 'Workshop', icon: FaTools, color: 'from-purple-500' },
+            { name: 'Service', icon: HiHeart, color: 'from-red-500' },
+            { name: 'Fundraiser', icon: FaDollarSign, color: 'from-green-500' },
+          ].map((category, idx) => {
+            const IconComponent = category.icon
+            return (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 20 }}
@@ -177,10 +182,11 @@ const EventsPage = () => {
               transition={{ delay: idx * 0.1 }}
               className="glass-card-dark p-6 text-center hover:shadow-glow smooth-transition"
             >
-              <div className="text-4xl mb-3">{category.icon}</div>
+              <IconComponent className="text-4xl mx-auto mb-3 text-pink-500" />
               <h4 className="text-lg font-bold text-white">{category.name}</h4>
             </motion.div>
-          ))}
+            )
+          })}
         </div>
       </Section>
 
@@ -211,7 +217,7 @@ const EventsPage = () => {
             </h3>
             <div className="space-y-3 mb-6 text-gray-300">
               <p className="flex items-center gap-2">
-                <span className="text-gold-400">📅</span>
+                <HiCalendar className="text-gold-400" />
                 {new Date(upcomingEvents[0].date).toLocaleDateString('en-US', {
                   weekday: 'long',
                   year: 'numeric',
@@ -221,13 +227,13 @@ const EventsPage = () => {
               </p>
               {upcomingEvents[0].time && (
                 <p className="flex items-center gap-2">
-                  <span className="text-gold-400">🕐</span>
+                  <HiClock className="text-gold-400" />
                   {upcomingEvents[0].time}
                 </p>
               )}
               {upcomingEvents[0].location && (
                 <p className="flex items-center gap-2">
-                  <span className="text-gold-400">📍</span>
+                  <HiLocationMarker className="text-gold-400" />
                   {upcomingEvents[0].location}
                 </p>
               )}

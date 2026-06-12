@@ -119,27 +119,16 @@ export const Hero: React.FC<HeroProps> = ({
     <div
       className="relative min-h-screen flex items-center justify-center pt-20 md:pt-24 px-4 overflow-hidden"
       style={{
+        background: 'linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,240,245,0.8) 50%, rgba(255,255,255,1) 100%)',
         backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-white/80 to-white" />
-
-      {/* Animated background shapes */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{ x: [0, 100, 0], y: [0, 50, 0] }}
-          transition={{ duration: 20, repeat: Infinity }}
-          className="absolute -top-40 -left-40 w-80 h-80 bg-pink-300 rounded-full blur-3xl opacity-10"
-        />
-        <motion.div
-          animate={{ x: [0, -100, 0], y: [0, -50, 0] }}
-          transition={{ duration: 25, repeat: Infinity }}
-          className="absolute -bottom-40 -right-40 w-80 h-80 bg-pink-200 rounded-full blur-3xl opacity-10"
-        />
-      </div>
+      {/* Decorative pink blobs */}
+      <div className="absolute top-20 left-10 w-64 h-64 bg-pink-200 rounded-full blur-3xl opacity-20" />
+      <div className="absolute bottom-40 right-20 w-96 h-96 bg-pink-300 rounded-full blur-3xl opacity-15" />
+      <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-pink-100 rounded-full blur-3xl opacity-15" />
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto text-center">

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa'
+import { HiHeart } from 'react-icons/hi'
 import { motion } from 'framer-motion'
 
 const Footer = () => {
@@ -115,7 +116,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center text-gray-600 text-sm">
             <p>&copy; {currentYear} Rotaract Club MEC Thrikkakara. All rights reserved.</p>
             <p className="mt-4 md:mt-0">
-              Made with <span className="text-pink-500">💗</span> by Rotaract
+              Made with <HiHeart className="inline text-pink-500 mx-1" /> by Rotaract
             </p>
           </div>
         </div>

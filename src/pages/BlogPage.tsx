@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { HiDocumentText, HiTag, HiUsers } from 'react-icons/hi'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import PageHeader from '@/components/PageHeader'
@@ -231,14 +232,16 @@ const BlogPage = () => {
       <Section id="stats">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
-            { number: blogs.length, label: 'Articles Published', icon: '📝' },
+            { number: blogs.length, label: 'Articles Published', icon: HiDocumentText },
             {
               number: categories.length - 1,
               label: 'Categories',
-              icon: '🏷️',
+              icon: HiTag,
             },
-            { number: '100+', label: 'Readers Monthly', icon: '👥' },
-          ].map((stat, idx) => (
+            { number: '100+', label: 'Readers Monthly', icon: HiUsers },
+          ].map((stat, idx) => {
+            const IconComponent = stat.icon
+            return (
             <motion.div
               key={idx}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -247,13 +250,14 @@ const BlogPage = () => {
               transition={{ delay: idx * 0.1 }}
               className="glass-card-dark p-8 text-center"
             >
-              <div className="text-5xl mb-4">{stat.icon}</div>
+              <IconComponent className="mx-auto text-5xl text-pink-500 mb-4" />
               <div className="text-4xl font-bold text-gradient mb-2">
                 {stat.number}
               </div>
               <p className="text-gray-400">{stat.label}</p>
             </motion.div>
-          ))}
+            )
+          })}
         </div>
       </Section>
 

@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { HiPencil, HiCalendar, HiClock } from 'react-icons/hi'
+import { FaFacebook, FaTwitter, FaLinkedin } from 'react-icons/fa'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { blogService } from '@/services/blogService'
@@ -16,9 +18,9 @@ const BlogDetailPage = () => {
 
   useSEO({
     title: blog?.title || 'Blog',
-    description: blog?.summary || 'Read articles and updates from Rotaract Club MEC Thrikkakara.',
+    description: blog?.excerpt || 'Read articles and updates from Rotaract Club MEC Thrikkakara.',
     keywords: `${blog?.category || 'Blog'}, Rotaract, MEC Thrikkakara`,
-    ogDescription: blog?.summary || 'Explore articles from Rotaract Club MEC Thrikkakara.',
+    ogDescription: blog?.excerpt || 'Explore articles from Rotaract Club MEC Thrikkakara.',
   })
 
   useEffect(() => {
@@ -103,12 +105,12 @@ const BlogDetailPage = () => {
           {/* Meta Information */}
           <div className="flex flex-wrap items-center gap-4 text-gray-400 mb-8 pb-8 border-b border-white border-opacity-10">
             <span className="flex items-center gap-2">
-              <span className="text-lg">✍️</span>
+              <HiPencil className="text-lg" />
               <span>{blog.author}</span>
             </span>
             <span>•</span>
             <span className="flex items-center gap-2">
-              <span className="text-lg">📅</span>
+              <HiCalendar className="text-lg" />
               <span>
                 {new Date(blog.date).toLocaleDateString('en-US', {
                   year: 'numeric',
@@ -119,7 +121,7 @@ const BlogDetailPage = () => {
             </span>
             <span>•</span>
             <span className="flex items-center gap-2">
-              <span className="text-lg">⏱️</span>
+              <HiClock className="text-lg" />
               <span>5 min read</span>
             </span>
           </div>
@@ -204,18 +206,21 @@ const BlogDetailPage = () => {
           <h3 className="text-xl font-bold text-white mb-4">Share This Article</h3>
           <div className="flex gap-3">
             {[
-              { name: 'Facebook', icon: '👍', color: 'hover:bg-blue-500' },
-              { name: 'Twitter', icon: '🐦', color: 'hover:bg-blue-400' },
-              { name: 'LinkedIn', icon: '💼', color: 'hover:bg-blue-600' },
-            ].map((social) => (
-              <button
-                key={social.name}
-                className={`p-3 rounded-lg bg-dark-800 border border-white border-opacity-20 text-xl smooth-transition ${social.color}`}
-                title={`Share on ${social.name}`}
-              >
-                {social.icon}
-              </button>
-            ))}
+              { name: 'Facebook', icon: FaFacebook, color: 'hover:bg-blue-500' },
+              { name: 'Twitter', icon: FaTwitter, color: 'hover:bg-blue-400' },
+              { name: 'LinkedIn', icon: FaLinkedin, color: 'hover:bg-blue-600' },
+            ].map((social) => {
+              const SocialIcon = social.icon
+              return (
+                <button
+                  key={social.name}
+                  className={`p-3 rounded-lg bg-dark-800 border border-white border-opacity-20 text-xl smooth-transition ${social.color}`}
+                  title={`Share on ${social.name}`}
+                >
+                  <SocialIcon />
+                </button>
+              )
+            })}
           </div>
         </motion.div>
 

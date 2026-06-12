@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { HiChartBar, HiTag, HiHeart } from 'react-icons/hi'
 import PageHeader from '@/components/PageHeader'
 import { Section } from '@/components/Common'
 import CardGrid, { ActivityCard } from '@/components/Cards'
@@ -199,19 +200,21 @@ const ActivitiesPage = () => {
             {
               number: activities.length,
               label: 'Total Activities',
-              icon: '📊',
+              icon: HiChartBar,
             },
             {
               number: categories.length - 1,
               label: 'Categories',
-              icon: '🏷️',
+              icon: HiTag,
             },
             {
               number: '500+',
               label: 'Lives Impacted',
-              icon: '❤️',
+              icon: HiHeart,
             },
-          ].map((stat, idx) => (
+          ].map((stat, idx) => {
+            const IconComponent = stat.icon
+            return (
             <motion.div
               key={idx}
               initial={{ opacity: 0, scale: 0.9 }}
@@ -220,13 +223,14 @@ const ActivitiesPage = () => {
               transition={{ delay: idx * 0.1 }}
               className="glass-card-dark p-8 text-center"
             >
-              <div className="text-5xl mb-4">{stat.icon}</div>
+              <IconComponent className="mx-auto text-5xl text-pink-500 mb-4" />
               <div className="text-4xl font-bold text-gradient mb-2">
                 {stat.number}
               </div>
               <p className="text-gray-400">{stat.label}</p>
             </motion.div>
-          ))}
+            )
+          })}
         </div>
       </Section>
 

@@ -35,7 +35,11 @@ function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="min-h-screen bg-white flex flex-col"
+            className="min-h-screen flex flex-col"
+            style={{
+              background: 'linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,225,240,0.9) 25%, rgba(255,240,248,0.7) 50%, rgba(255,225,240,0.9) 75%, rgba(255,255,255,1) 100%)',
+              backgroundAttachment: 'fixed',
+            }}
           >
             <Navbar />
             <main className="flex-grow">

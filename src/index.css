@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;500&family=Raleway:wght@700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
 
 * {
   @apply antialiased;
@@ -13,8 +13,18 @@ html {
 }
 
 body {
-  @apply bg-white text-gray-900;
-  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,240,245,0.6) 50%, rgba(255,250,252,1) 100%);
+  background-attachment: fixed;
+  @apply text-gray-900;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  position: relative;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  @apply text-pink-700;
 }
 
 ::-webkit-scrollbar {
@@ -34,11 +44,11 @@ body {
 }
 
 .glass-card {
-  @apply backdrop-blur-md bg-white bg-opacity-95 border border-pink-200 rounded-xl shadow-lg;
+  @apply backdrop-blur-md bg-gradient-to-br from-white via-pink-50 to-pink-100 border border-pink-200 rounded-xl shadow-lg;
 }
 
 .glass-card-dark {
-  @apply backdrop-blur-md bg-white bg-opacity-90 border border-pink-100 rounded-xl shadow-lg;
+  @apply backdrop-blur-md bg-gradient-to-br from-white via-pink-50 to-pink-100 border border-pink-200 rounded-xl shadow-lg;
 }
 
 .gradient-gold {
@@ -50,11 +60,19 @@ body {
 }
 
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-600 via-pink-500 to-pink-700;
 }
 
 .text-gradient-primary {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-primary-600;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-pink-800;
+}
+
+.gradient-section {
+  @apply bg-gradient-to-br from-pink-50 via-white to-pink-100;
+}
+
+.premium-heading {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-700 to-pink-500 font-bold;
 }
 
 .smooth-transition {

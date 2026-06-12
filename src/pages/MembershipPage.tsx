@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { HiCheckCircle, HiUsers, HiCalendar, HiHeart } from 'react-icons/hi'
+import { FiTarget } from 'react-icons/fi'
 import PageHeader from '@/components/PageHeader'
 import { Section, Button } from '@/components/Common'
 import { useSEO } from '@/hooks'
@@ -99,7 +101,7 @@ const MembershipPage = () => {
                 transition={{ delay: idx * 0.1 }}
                 className="flex items-start text-lg text-gray-300"
               >
-                <span className="text-gold-400 mr-4 mt-1">✓</span>
+                <HiCheckCircle className="text-gold-400 mr-4 mt-1 text-lg flex-shrink-0" />
                 <span>{criterion}</span>
               </motion.li>
             ))}
@@ -181,26 +183,27 @@ const MembershipPage = () => {
       <Section id="facts">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {[
-            { number: '200+', label: 'Active Members', icon: '👥' },
-            { number: '9', label: 'Years of Service', icon: '📅' },
-            { number: '50+', label: 'Projects Completed', icon: '🎯' },
-            { number: '5L+', label: 'Lives Impacted', icon: '💖' },
-          ].map((fact, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="glass-card-dark p-8 text-center"
-            >
-              <div className="text-5xl mb-4">{fact.icon}</div>
-              <div className="text-4xl font-bold text-gradient mb-2">
-                {fact.number}
-              </div>
-              <p className="text-gray-400">{fact.label}</p>
-            </motion.div>
-          ))}
+            { number: '200+', label: 'Active Members', icon: HiUsers },
+            { number: '9', label: 'Years of Service', icon: HiCalendar },
+            { number: '50+', label: 'Projects Completed', icon: FiTarget },
+            { number: '5L+', label: 'Lives Impacted', icon: HiHeart },
+          ].map((fact, idx) => {
+            const IconComponent = fact.icon
+            return (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="glass-card-dark p-8 text-center"
+              >
+                <IconComponent className="mx-auto text-5xl text-pink-500 mb-4" />
+                <h3 className="text-3xl font-bold text-white mb-2">{fact.number}</h3>
+                <p className="text-gray-400">{fact.label}</p>
+              </motion.div>
+            )
+          })}
         </div>
       </Section>
 

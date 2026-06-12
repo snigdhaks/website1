@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import { HiSparkles, HiEye } from 'react-icons/hi'
+import { FaLightbulb, FaStar } from 'react-icons/fa'
 import { Hero, Section, Button } from '@/components/Common'
 import CardGrid, { BlogCard, EventCard, ActivityCard } from '@/components/Cards'
 import { blogService } from '@/services/blogService'
@@ -37,7 +39,17 @@ const HomePage = () => {
   }, [])
 
   return (
-    <div className="min-h-screen">
+    <div 
+      className="min-h-screen relative overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,225,240,0.9) 25%, rgba(255,240,248,0.7) 50%, rgba(255,225,240,0.9) 75%, rgba(255,255,255,1) 100%)',
+        backgroundAttachment: 'fixed',
+      }}
+    >
+      {/* Decorative pink blobs */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-pink-200 rounded-full blur-3xl opacity-25" />
+      <div className="absolute bottom-40 right-20 w-96 h-96 bg-pink-300 rounded-full blur-3xl opacity-20" />
+      <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-pink-100 rounded-full blur-3xl opacity-20" />
       {/* Hero Section */}
       <Hero
         title="Rotaract Club MEC Thrikkakara"
@@ -54,7 +66,7 @@ const HomePage = () => {
           className="mt-12"
         >
           <div className="flex justify-center">
-            <div className="text-gold-400 text-6xl">✨</div>
+            <HiSparkles className="text-gold-400 text-6xl" />
           </div>
         </motion.div>
       </Hero>
@@ -68,24 +80,26 @@ const HomePage = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
             {
-              icon: '🎯',
+              icon: HiEye,
               title: 'Vision',
               description:
                 'To be a catalyst for positive change in society through service, leadership, and fellowship.',
             },
             {
-              icon: '💡',
+              icon: FaLightbulb,
               title: 'Mission',
               description:
                 'To develop emerging leaders through service projects and community engagement.',
             },
             {
-              icon: '🌟',
+              icon: FaStar,
               title: 'Impact',
               description:
                 'Creating lasting change in our community through dedicated service and collaboration.',
             },
-          ].map((item, idx) => (
+          ].map((item, idx) => {
+            const IconComponent = item.icon
+            return (
             <motion.div
               key={idx}
               initial={{ opacity: 0, y: 20 }}
@@ -94,11 +108,12 @@ const HomePage = () => {
               transition={{ delay: idx * 0.2 }}
               className="glass-card-dark p-8 text-center"
             >
-              <div className="text-5xl mb-4">{item.icon}</div>
+              <IconComponent className="mx-auto text-5xl text-pink-500 mb-4" />
               <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
               <p className="text-gray-300">{item.description}</p>
             </motion.div>
-          ))}
+            )
+          })}
         </div>
 
         <motion.div
