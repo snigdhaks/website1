@@ -6,6 +6,7 @@ import CardGrid, { BlogCard, EventCard, ActivityCard } from '@/components/Cards'
 import { blogService } from '@/services/blogService'
 import { eventService } from '@/services/eventService'
 import { activityService } from '@/services/activityService'
+import { useSEO } from '@/hooks'
 import { Blog, Event, Activity } from '@/types'
 
 const HomePage = () => {
@@ -13,6 +14,13 @@ const HomePage = () => {
   const [upcomingEvents, setUpcomingEvents] = useState<Event[]>([])
   const [recentActivities, setRecentActivities] = useState<Activity[]>([])
   const navigate = useNavigate()
+
+  useSEO({
+    title: 'Home',
+    description: 'Rotaract Club of Model Engineering College, Thrikkakara - Service and Leadership. Join us for meaningful community engagement and volunteer opportunities.',
+    keywords: 'Rotaract MEC, Thrikkakara, Community Service, Leadership, Volunteer, Events',
+    ogDescription: 'Explore the Rotaract Club MEC Thrikkakara - dedicated to service, leadership, and fellowship.',
+  })
 
   useEffect(() => {
     const loadData = async () => {

@@ -41,7 +41,7 @@ export const GlassCard: React.FC<GlassCardProps> = ({
       whileHover={hover ? { y: -8 } : {}}
       transition={{ duration: 0.3 }}
       onClick={onClick}
-      className={`glass-card-dark p-6 md:p-8 ${hover ? 'cursor-pointer' : ''} ${className}`}
+      className={`glass-card p-6 md:p-8 ${hover ? 'cursor-pointer' : ''} ${className}`}
     >
       {children}
     </motion.div>
@@ -71,20 +71,20 @@ export const CoordinatorCard: React.FC<{
             />
           </motion.div>
         )}
-        <h3 className="text-xl font-bold text-white mb-1">{name}</h3>
-        <p className="text-gold-400 font-semibold mb-1">{role}</p>
+        <h3 className="text-xl font-bold text-gray-900 mb-1">{name}</h3>
+        <p className="text-pink-600 font-semibold mb-1">{role}</p>
         {department && (
-          <p className="text-sm text-gray-400 mb-3">{department}</p>
+          <p className="text-sm text-gray-600 mb-3">{department}</p>
         )}
         {description && (
-          <p className="text-gray-300 text-sm mb-4">{description}</p>
+          <p className="text-gray-700 text-sm mb-4">{description}</p>
         )}
         {social && (
-          <div className="flex justify-center gap-3 pt-4 border-t border-white border-opacity-10">
+          <div className="flex justify-center gap-3 pt-4 border-t border-pink-200">
             {social.facebook && (
               <a
                 href={social.facebook}
-                className="text-gray-400 hover:text-gold-400 smooth-transition"
+                className="text-gray-600 hover:text-pink-600 smooth-transition"
               >
                 f
               </a>
@@ -92,7 +92,7 @@ export const CoordinatorCard: React.FC<{
             {social.instagram && (
               <a
                 href={social.instagram}
-                className="text-gray-400 hover:text-gold-400 smooth-transition"
+                className="text-gray-600 hover:text-pink-600 smooth-transition"
               >
                 ig
               </a>
@@ -100,7 +100,7 @@ export const CoordinatorCard: React.FC<{
             {social.linkedin && (
               <a
                 href={social.linkedin}
-                className="text-gray-400 hover:text-gold-400 smooth-transition"
+                className="text-gray-600 hover:text-pink-600 smooth-transition"
               >
                 in
               </a>

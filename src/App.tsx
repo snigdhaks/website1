@@ -35,7 +35,7 @@ function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="min-h-screen bg-dark-950 flex flex-col"
+            className="min-h-screen bg-white flex flex-col"
           >
             <Navbar />
             <main className="flex-grow">

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { blogService } from '@/services/blogService'
+import { useSEO } from '@/hooks'
 import { Blog } from '@/types'
 
 const BlogDetailPage = () => {
@@ -12,6 +13,13 @@ const BlogDetailPage = () => {
   const [blog, setBlog] = useState<Blog | null>(null)
   const [relatedBlogs, setRelatedBlogs] = useState<Blog[]>([])
   const [loading, setLoading] = useState(true)
+
+  useSEO({
+    title: blog?.title || 'Blog',
+    description: blog?.summary || 'Read articles and updates from Rotaract Club MEC Thrikkakara.',
+    keywords: `${blog?.category || 'Blog'}, Rotaract, MEC Thrikkakara`,
+    ogDescription: blog?.summary || 'Explore articles from Rotaract Club MEC Thrikkakara.',
+  })
 
   useEffect(() => {
     const fetchBlog = async () => {

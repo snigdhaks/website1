@@ -4,9 +4,16 @@ import PageHeader from '@/components/PageHeader'
 import { Section } from '@/components/Common'
 import CardGrid, { CoordinatorCard } from '@/components/Cards'
 import { coordinatorService } from '@/services/coordinatorService'
+import { useSEO } from '@/hooks'
 import { Coordinator } from '@/types'
 
 const CoordinatorsPage = () => {
+  useSEO({
+    title: 'Coordinators',
+    description: 'Meet the coordinators of Rotaract Club MEC Thrikkakara - leaders dedicated to service and community engagement.',
+    keywords: 'Coordinators, Leadership, Rotaract MEC, Team',
+    ogDescription: 'Meet the leadership team of Rotaract Club MEC Thrikkakara.',
+  })
   const [coordinators, setCoordinators] = useState<Coordinator[]>([])
   const [loading, setLoading] = useState(true)
 

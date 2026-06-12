@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import PageHeader from '@/components/PageHeader'
 import { Section, Button } from '@/components/Common'
+import { useSEO } from '@/hooks'
 
 interface MembershipData {
   title: string
@@ -25,6 +26,13 @@ interface MembershipData {
 const MembershipPage = () => {
   const [data, setData] = useState<MembershipData | null>(null)
   const [selectedProcess, setSelectedProcess] = useState(0)
+
+  useSEO({
+    title: 'Membership',
+    description: 'Join Rotaract Club MEC Thrikkakara. Learn about membership benefits, eligibility, and the application process.',
+    keywords: 'Membership, Join Rotaract, Benefits, Application',
+    ogDescription: 'Join Rotaract Club MEC Thrikkakara and be part of our service community.',
+  })
 
   useEffect(() => {
     const fetchData = async () => {

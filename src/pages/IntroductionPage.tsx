@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import PageHeader from '@/components/PageHeader'
 import { Section } from '@/components/Common'
+import { useSEO } from '@/hooks'
 
 interface IntroductionData {
   title: string
@@ -14,6 +15,13 @@ interface IntroductionData {
 
 const IntroductionPage = () => {
   const [data, setData] = useState<IntroductionData | null>(null)
+
+  useSEO({
+    title: 'About Us',
+    description: 'Learn about Rotaract Club of Model Engineering College, Thrikkakara - our vision, mission, values, and history.',
+    keywords: 'About Rotaract, MEC Thrikkakara, Vision, Mission, Leadership',
+    ogDescription: 'Discover the vision and mission of Rotaract Club MEC Thrikkakara.',
+  })
 
   useEffect(() => {
     const fetchData = async () => {

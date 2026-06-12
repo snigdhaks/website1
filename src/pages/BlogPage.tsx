@@ -5,9 +5,16 @@ import PageHeader from '@/components/PageHeader'
 import { Section } from '@/components/Common'
 import CardGrid, { BlogCard } from '@/components/Cards'
 import { blogService } from '@/services/blogService'
+import { useSEO } from '@/hooks'
 import { Blog } from '@/types'
 
 const BlogPage = () => {
+  useSEO({
+    title: 'Blog',
+    description: 'Read articles and updates from Rotaract Club MEC Thrikkakara. Stories, insights, and reflections on community service.',
+    keywords: 'Blog, Articles, Updates, Rotaract Stories',
+    ogDescription: 'Explore articles and stories from Rotaract Club MEC Thrikkakara.',
+  })
   const [blogs, setBlogs] = useState<Blog[]>([])
   const [filteredBlogs, setFilteredBlogs] = useState<Blog[]>([])
   const [selectedCategory, setSelectedCategory] = useState('All')

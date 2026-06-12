@@ -29,9 +29,9 @@ export const Button: React.FC<ButtonProps> = ({
   }
 
   const variantClasses = {
-    primary: 'bg-gradient-gold text-dark-950 hover:shadow-lg hover:shadow-gold-500/50',
-    secondary: 'bg-primary-600 text-white hover:bg-primary-700',
-    outline: 'border-2 border-gold-400 text-gold-400 hover:bg-gold-400 hover:text-dark-950',
+    primary: 'bg-gradient-primary text-white hover:shadow-lg hover:shadow-pink-500/50',
+    secondary: 'bg-pink-500 text-white hover:bg-pink-600',
+    outline: 'border-2 border-pink-500 text-pink-600 hover:bg-pink-500 hover:text-white',
   }
 
   const content = (
@@ -89,7 +89,7 @@ export const Section: React.FC<SectionProps> = ({
             </h2>
           )}
           {subtitle && (
-            <p className="text-gray-300 text-lg max-w-2xl mx-auto">{subtitle}</p>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">{subtitle}</p>
           )}
         </motion.div>
       )}
@@ -125,19 +125,19 @@ export const Hero: React.FC<HeroProps> = ({
       }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-dark-950 via-dark-950/80 to-dark-950" />
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-white/80 to-white" />
 
       {/* Animated background shapes */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           animate={{ x: [0, 100, 0], y: [0, 50, 0] }}
           transition={{ duration: 20, repeat: Infinity }}
-          className="absolute -top-40 -left-40 w-80 h-80 bg-primary-600 rounded-full blur-3xl opacity-10"
+          className="absolute -top-40 -left-40 w-80 h-80 bg-pink-300 rounded-full blur-3xl opacity-10"
         />
         <motion.div
           animate={{ x: [0, -100, 0], y: [0, -50, 0] }}
           transition={{ duration: 25, repeat: Infinity }}
-          className="absolute -bottom-40 -right-40 w-80 h-80 bg-gold-500 rounded-full blur-3xl opacity-10"
+          className="absolute -bottom-40 -right-40 w-80 h-80 bg-pink-200 rounded-full blur-3xl opacity-10"
         />
       </div>
 
@@ -153,7 +153,7 @@ export const Hero: React.FC<HeroProps> = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-gold-400 font-semibold text-lg md:text-xl mb-4"
+              className="text-pink-500 font-semibold text-lg md:text-xl mb-4"
             >
               {subtitle}
             </motion.p>
@@ -173,7 +173,7 @@ export const Hero: React.FC<HeroProps> = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="text-gray-300 text-lg md:text-xl mb-8 max-w-2xl mx-auto"
+              className="text-gray-600 text-lg md:text-xl mb-8 max-w-2xl mx-auto"
             >
               {description}
             </motion.p>

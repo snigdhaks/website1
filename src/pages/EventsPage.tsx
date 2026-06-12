@@ -4,9 +4,16 @@ import PageHeader from '@/components/PageHeader'
 import { Section } from '@/components/Common'
 import CardGrid, { EventCard } from '@/components/Cards'
 import { eventService } from '@/services/eventService'
+import { useSEO } from '@/hooks'
 import { Event } from '@/types'
 
 const EventsPage = () => {
+  useSEO({
+    title: 'Events',
+    description: 'Upcoming and past events by Rotaract Club MEC Thrikkakara. Join us for community service and leadership development.',
+    keywords: 'Events, Upcoming Events, Rotaract MEC, Community',
+    ogDescription: 'Check out the upcoming events hosted by Rotaract Club MEC Thrikkakara.',
+  })
   const [upcomingEvents, setUpcomingEvents] = useState<Event[]>([])
   const [pastEvents, setPastEvents] = useState<Event[]>([])
   const [activeTab, setActiveTab] = useState<'upcoming' | 'past'>('upcoming')

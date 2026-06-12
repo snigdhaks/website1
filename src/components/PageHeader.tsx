@@ -36,7 +36,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="text-xl md:text-2xl text-gold-400 font-light mb-4"
+          className="text-xl md:text-2xl text-pink-500 font-light mb-4"
         >
           {subtitle}
         </motion.p>
@@ -47,7 +47,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 0.6 }}
-          className="max-w-2xl mx-auto text-gray-300 text-lg font-light"
+          className="max-w-2xl mx-auto text-gray-600 text-lg font-light"
         >
           {description}
         </motion.p>

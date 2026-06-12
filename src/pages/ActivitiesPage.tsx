@@ -4,9 +4,16 @@ import PageHeader from '@/components/PageHeader'
 import { Section } from '@/components/Common'
 import CardGrid, { ActivityCard } from '@/components/Cards'
 import { activityService } from '@/services/activityService'
+import { useSEO } from '@/hooks'
 import { Activity } from '@/types'
 
 const ActivitiesPage = () => {
+  useSEO({
+    title: 'Activities',
+    description: 'Explore the various activities and initiatives by Rotaract Club MEC Thrikkakara - from workshops to community service.',
+    keywords: 'Activities, Community Service, Workshops, Events, Volunteer',
+    ogDescription: 'Discover the activities and community service projects of Rotaract Club MEC.',
+  })
   const [activities, setActivities] = useState<Activity[]>([])
   const [filteredActivities, setFilteredActivities] = useState<Activity[]>([])
   const [selectedCategory, setSelectedCategory] = useState('All')

@@ -10,6 +10,9 @@ export const useScrollReveal = () => {
   return isVisible
 }
 
+export { useSEO } from './useSEO'
+
+
 export const useInViewport = (threshold = 0.1) => {
   const [isVisible, setIsVisible] = useState(false)
   const [ref, setRef] = useState<HTMLDivElement | null>(null)

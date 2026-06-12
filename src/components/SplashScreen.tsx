@@ -55,38 +55,32 @@ const SplashScreen = () => {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-dark-950 via-dark-900 to-dark-950 z-50 overflow-hidden"
+      className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-white via-pink-50 to-white z-50 overflow-hidden"
     >
       {/* Background animated circles */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.1 }}
+          animate={{ opacity: 0.15 }}
           transition={{ duration: 2 }}
-          className="absolute top-0 left-1/4 w-96 h-96 bg-primary-600 rounded-full blur-3xl"
+          className="absolute top-0 left-1/4 w-96 h-96 bg-pink-300 rounded-full blur-3xl"
         />
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.1 }}
           transition={{ duration: 2, delay: 0.5 }}
-          className="absolute bottom-0 right-1/4 w-96 h-96 bg-gold-500 rounded-full blur-3xl"
+          className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-200 rounded-full blur-3xl"
         />
       </div>
 
       <div className="relative z-10 text-center px-4">
         {/* Logo */}
         <motion.div variants={logoVariants} className="mb-8 flex justify-center">
-          <div className="w-24 h-24 relative">
-            {/* Animated logo circle */}
-            <motion.div
-              className="absolute inset-0 rounded-full border-2 border-transparent border-t-gold-500 border-r-primary-600"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-4xl font-bold text-gradient">R</span>
-            </div>
-          </div>
+          <img 
+            src="/821BEB28-B6DD-4E85-A1EF-C60BA699FE9B.PNG" 
+            alt="Rotaract Club MEC Icon" 
+            className="w-32 h-32 object-contain"
+          />
         </motion.div>
 
         {/* Club Name */}
@@ -100,7 +94,7 @@ const SplashScreen = () => {
                   variants={letterVariants}
                   initial="initial"
                   animate="animate"
-                  className="text-4xl md:text-5xl font-bold text-white font-space-grotesk"
+                  className="text-4xl md:text-5xl font-bold text-pink-600 font-space-grotesk"
                 >
                   {letter}
                 </motion.span>
@@ -112,7 +106,7 @@ const SplashScreen = () => {
         {/* Tagline */}
         {showText && (
           <motion.div variants={textVariants} className="mb-12">
-            <p className="text-xl md:text-2xl text-gray-300 font-light">
+            <p className="text-xl md:text-2xl text-gray-700 font-light">
               {tagline}
             </p>
           </motion.div>
@@ -129,7 +123,7 @@ const SplashScreen = () => {
             {[0, 1, 2].map((i) => (
               <motion.div
                 key={i}
-                className="w-3 h-3 rounded-full bg-gold-500"
+                className="w-3 h-3 rounded-full bg-pink-500"
                 animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
                 transition={{
                   duration: 1.5,
@@ -143,7 +137,7 @@ const SplashScreen = () => {
 
         {/* Subtitle text */}
         <motion.p
-          className="text-sm text-gray-500 mt-12 font-light"
+          className="text-sm text-gray-600 mt-12 font-light"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 3 }}
