@@ -58,13 +58,13 @@ const CoordinatorsPage = () => {
         {loading ? (
           <div className="text-center py-12">
             <div className="inline-block animate-spin">
-              <div className="w-12 h-12 border-4 border-gold-500 border-t-transparent rounded-full" />
+              <div className="w-12 h-12 border-4 border-cranberry border-t-transparent rounded-full" />
             </div>
-            <p className="text-gray-400 mt-4">Loading coordinators...</p>
+            <p className="text-textgray mt-4">Loading coordinators...</p>
           </div>
         ) : coordinators.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-400 text-lg">No coordinators found</p>
+            <p className="text-textgray text-lg">No coordinators found</p>
           </div>
         ) : (
           <motion.div
@@ -101,12 +101,12 @@ const CoordinatorsPage = () => {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="glass-card-dark p-8"
+            className="glass-card p-8"
           >
-            <h3 className="text-2xl font-bold text-white mb-4">
+            <h3 className="text-2xl font-bold text-navy mb-4">
               Servant Leadership
             </h3>
-            <p className="text-gray-300 leading-relaxed">
+            <p className="text-textgray leading-relaxed">
               Our coordinators embody the principle of servant leadership,
               prioritizing the needs of the community and members. They lead by
               example, demonstrating commitment and dedication in every project.
@@ -117,12 +117,12 @@ const CoordinatorsPage = () => {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="glass-card-dark p-8"
+            className="glass-card p-8"
           >
-            <h3 className="text-2xl font-bold text-white mb-4">
+            <h3 className="text-2xl font-bold text-navy mb-4">
               Collaborative Vision
             </h3>
-            <p className="text-gray-300 leading-relaxed">
+            <p className="text-textgray leading-relaxed">
               We believe in collaborative decision-making where every voice is
               heard and valued. Together, our coordinators work towards creating
               opportunities for growth and positive change.
@@ -190,15 +190,15 @@ const CoordinatorsPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="glass-card-dark p-6"
+              className="glass-card p-6"
             >
-              <h4 className="text-xl font-bold text-gold-400 mb-4">
+              <h4 className="text-xl font-bold text-navy mb-4">
                 {item.role}
               </h4>
               <ul className="space-y-2">
                 {item.responsibilities.map((resp, i) => (
-                  <li key={i} className="text-gray-300 text-sm flex items-start">
-                    <span className="text-gold-400 mr-2">•</span>
+                  <li key={i} className="text-textgray text-sm flex items-start">
+                    <span className="text-roseaccent mr-2 font-bold">•</span>
                     <span>{resp}</span>
                   </li>
                 ))}
@@ -209,23 +209,23 @@ const CoordinatorsPage = () => {
       </Section>
 
       {/* Join Section */}
-      <Section className="bg-gradient-to-r from-primary-900 to-primary-800 bg-opacity-50 rounded-2xl">
+      <Section className="bg-gradient-to-r from-navy via-purpleaccent to-cranberry rounded-[20px] shadow-xl p-8 md:p-16">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="text-center py-12"
         >
-          <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h3 className="text-3xl md:text-4xl font-bold font-serif text-white mb-6">
             Interested in Leadership?
           </h3>
-          <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
             If you have the passion and dedication to lead, we encourage you to
             apply for a coordinator position in our next term.
           </p>
           <a
             href="#"
-            className="inline-block px-8 py-3 bg-gradient-gold text-dark-950 font-semibold rounded-lg hover:shadow-lg hover:shadow-gold-500/50 smooth-transition"
+            className="inline-block px-8 py-3 bg-cranberry text-white font-semibold rounded-[14px] hover:bg-cranberry/90 smooth-transition hover:shadow-premium"
           >
             Apply for Leadership
           </a>

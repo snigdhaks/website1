@@ -62,7 +62,7 @@ const BlogDetailPage = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin">
-          <div className="w-12 h-12 border-4 border-gold-500 border-t-transparent rounded-full" />
+          <div className="w-12 h-12 border-4 border-cranberry border-t-transparent rounded-full" />
         </div>
       </div>
     )
@@ -72,10 +72,10 @@ const BlogDetailPage = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-400 text-lg mb-4">Blog post not found</p>
+          <p className="text-textgray text-lg mb-4">Blog post not found</p>
           <button
             onClick={() => navigate('/blog')}
-            className="px-6 py-3 bg-gold-500 text-dark-950 font-semibold rounded-lg"
+            className="px-6 py-3 bg-cranberry text-white font-semibold rounded-[14px] hover:bg-cranberry/90 hover:shadow-premium smooth-transition"
           >
             Back to Blog
           </button>
@@ -98,19 +98,19 @@ const BlogDetailPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-navy mb-6 leading-tight font-serif">
             {blog.title}
           </h1>
 
           {/* Meta Information */}
-          <div className="flex flex-wrap items-center gap-4 text-gray-400 mb-8 pb-8 border-b border-white border-opacity-10">
+          <div className="flex flex-wrap items-center gap-4 text-textgray mb-8 pb-8 border-b border-gray-100">
             <span className="flex items-center gap-2">
-              <HiPencil className="text-lg" />
+              <HiPencil className="text-lg text-roseaccent" />
               <span>{blog.author}</span>
             </span>
             <span>•</span>
             <span className="flex items-center gap-2">
-              <HiCalendar className="text-lg" />
+              <HiCalendar className="text-lg text-roseaccent" />
               <span>
                 {new Date(blog.date).toLocaleDateString('en-US', {
                   year: 'numeric',
@@ -121,7 +121,7 @@ const BlogDetailPage = () => {
             </span>
             <span>•</span>
             <span className="flex items-center gap-2">
-              <HiClock className="text-lg" />
+              <HiClock className="text-lg text-roseaccent" />
               <span>5 min read</span>
             </span>
           </div>
@@ -132,7 +132,7 @@ const BlogDetailPage = () => {
               {blog.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 bg-primary-600 bg-opacity-30 text-primary-300 text-sm rounded-full hover:bg-opacity-50 smooth-transition cursor-pointer"
+                  className="px-3 py-1 bg-roseaccent/10 text-roseaccent text-sm rounded-full hover:bg-roseaccent/20 smooth-transition cursor-pointer font-medium"
                 >
                   #{tag}
                 </span>
@@ -147,7 +147,7 @@ const BlogDetailPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="mb-12 overflow-hidden rounded-lg shadow-lg"
+            className="mb-12 overflow-hidden rounded-lg shadow-md"
           >
             <img
               src={blog.coverImage}
@@ -162,9 +162,9 @@ const BlogDetailPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="prose prose-invert max-w-none mb-16"
+          className="prose max-w-none mb-16"
         >
-          <div className="blog-content text-gray-300 leading-relaxed text-lg">
+          <div className="blog-content text-textgray leading-relaxed text-lg">
             <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {blog.content}
             </ReactMarkdown>
@@ -176,19 +176,19 @@ const BlogDetailPage = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass-card-dark p-8 mb-16 border border-white border-opacity-10"
+          className="glass-card p-8 mb-16 border border-gray-100"
         >
           <div className="flex items-start gap-4">
-            <div className="w-16 h-16 rounded-full bg-gradient-gold flex items-center justify-center flex-shrink-0">
-              <span className="text-2xl font-bold text-dark-950">
+            <div className="w-16 h-16 rounded-full bg-roseaccent/10 flex items-center justify-center flex-shrink-0 border border-roseaccent/20">
+              <span className="text-2xl font-bold text-roseaccent">
                 {blog.author[0]}
               </span>
             </div>
             <div>
-              <h3 className="text-xl font-bold text-white mb-2">
+              <h3 className="text-xl font-bold text-navy mb-2 font-serif">
                 About {blog.author}
               </h3>
-              <p className="text-gray-300">
+              <p className="text-textgray leading-relaxed">
                 {blog.author} is an active member of Rotaract Club MEC, passionate
                 about community service and sharing knowledge.
               </p>
@@ -201,20 +201,20 @@ const BlogDetailPage = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16 pb-16 border-b border-white border-opacity-10"
+          className="mb-16 pb-16 border-b border-gray-100"
         >
-          <h3 className="text-xl font-bold text-white mb-4">Share This Article</h3>
+          <h3 className="text-xl font-bold text-navy mb-4 font-serif">Share This Article</h3>
           <div className="flex gap-3">
             {[
-              { name: 'Facebook', icon: FaFacebook, color: 'hover:bg-blue-500' },
-              { name: 'Twitter', icon: FaTwitter, color: 'hover:bg-blue-400' },
-              { name: 'LinkedIn', icon: FaLinkedin, color: 'hover:bg-blue-600' },
+              { name: 'Facebook', icon: FaFacebook, color: 'hover:bg-blue-500 hover:text-white hover:border-transparent' },
+              { name: 'Twitter', icon: FaTwitter, color: 'hover:bg-blue-400 hover:text-white hover:border-transparent' },
+              { name: 'LinkedIn', icon: FaLinkedin, color: 'hover:bg-blue-600 hover:text-white hover:border-transparent' },
             ].map((social) => {
               const SocialIcon = social.icon
               return (
                 <button
                   key={social.name}
-                  className={`p-3 rounded-lg bg-dark-800 border border-white border-opacity-20 text-xl smooth-transition ${social.color}`}
+                  className={`p-3 rounded-[12px] bg-white border border-gray-100 text-textgray text-xl smooth-transition ${social.color}`}
                   title={`Share on ${social.name}`}
                 >
                   <SocialIcon />
@@ -231,7 +231,7 @@ const BlogDetailPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-3xl font-bold text-white mb-8">Related Articles</h3>
+            <h3 className="text-3xl font-bold text-navy mb-8 font-serif">Related Articles</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {relatedBlogs.map((relatedBlog, idx) => (
                 <motion.button
@@ -241,7 +241,7 @@ const BlogDetailPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
-                  className="glass-card-dark p-6 hover:shadow-glow smooth-transition text-left"
+                  className="glass-card p-6 hover:shadow-md smooth-transition text-left"
                 >
                   {relatedBlog.coverImage && (
                     <div className="mb-4 overflow-hidden rounded-lg h-40">
@@ -252,13 +252,13 @@ const BlogDetailPage = () => {
                       />
                     </div>
                   )}
-                  <h4 className="font-bold text-white mb-2 line-clamp-2">
+                  <h4 className="font-bold text-navy mb-2 line-clamp-2">
                     {relatedBlog.title}
                   </h4>
-                  <p className="text-sm text-gray-400 mb-3">
+                  <p className="text-sm text-textgray mb-3">
                     {new Date(relatedBlog.date).toLocaleDateString()}
                   </p>
-                  <p className="text-gray-300 text-sm line-clamp-2">
+                  <p className="text-textgray text-sm line-clamp-2 leading-relaxed">
                     {relatedBlog.excerpt}
                   </p>
                 </motion.button>
@@ -277,7 +277,7 @@ const BlogDetailPage = () => {
       >
         <button
           onClick={() => navigate('/blog')}
-          className="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg smooth-transition flex items-center gap-2"
+          className="px-6 py-3 bg-cranberry hover:bg-cranberry/90 text-white font-semibold rounded-[14px] hover:shadow-premium smooth-transition flex items-center gap-2"
         >
           ← Back to Blog
         </button>
@@ -286,31 +286,31 @@ const BlogDetailPage = () => {
       {/* Custom Markdown Styles */}
       <style>{`
         .blog-content h2 {
-          @apply text-3xl font-bold text-white mt-8 mb-4;
+          @apply text-3xl font-bold text-navy mt-8 mb-4 font-serif;
         }
         .blog-content h3 {
-          @apply text-2xl font-bold text-white mt-6 mb-3;
+          @apply text-2xl font-bold text-navy mt-6 mb-3 font-serif;
         }
         .blog-content p {
-          @apply mb-4;
+          @apply mb-4 leading-relaxed;
         }
         .blog-content ul, .blog-content ol {
-          @apply mb-4 ml-6;
+          @apply mb-4 ml-6 list-disc;
         }
         .blog-content li {
           @apply mb-2;
         }
         .blog-content a {
-          @apply text-gold-400 hover:text-gold-300 underline smooth-transition;
+          @apply text-cranberry hover:text-cranberry/80 underline smooth-transition;
         }
         .blog-content blockquote {
-          @apply border-l-4 border-gold-500 pl-4 italic text-gray-400 my-4;
+          @apply border-l-4 border-cranberry/30 pl-4 italic text-textgray my-4;
         }
         .blog-content code {
-          @apply bg-dark-800 px-2 py-1 rounded text-gold-400 font-mono;
+          @apply bg-blush px-2 py-1 rounded text-cranberry font-mono text-sm;
         }
         .blog-content pre {
-          @apply bg-dark-800 p-4 rounded-lg overflow-x-auto my-4;
+          @apply bg-blush p-4 rounded-lg overflow-x-auto my-4 border border-cranberry/10;
         }
       `}</style>
     </div>

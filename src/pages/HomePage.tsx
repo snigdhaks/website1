@@ -42,17 +42,23 @@ const HomePage = () => {
     <div 
       className="min-h-screen relative overflow-hidden"
       style={{
-        background: 'linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,225,240,0.9) 25%, rgba(255,240,248,0.7) 50%, rgba(255,225,240,0.9) 75%, rgba(255,255,255,1) 100%)',
+        background: 'linear-gradient(135deg, #FFFFFF 0%, #FFF6FA 100%)',
         backgroundAttachment: 'fixed',
       }}
     >
-      {/* Decorative pink blobs */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-pink-200 rounded-full blur-3xl opacity-25" />
-      <div className="absolute bottom-40 right-20 w-96 h-96 bg-pink-300 rounded-full blur-3xl opacity-20" />
-      <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-pink-100 rounded-full blur-3xl opacity-20" />
+      {/* Decorative blobs */}
+      <div className="absolute top-20 left-10 w-72 h-72 bg-blush rounded-full blur-3xl opacity-60" />
+      <div className="absolute bottom-40 right-20 w-96 h-96 bg-roseaccent rounded-full blur-3xl opacity-[0.05]" />
+      <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-purpleaccent rounded-full blur-3xl opacity-[0.03]" />
+
       {/* Hero Section */}
       <Hero
-        title="Rotaract Club MEC Thrikkakara"
+        title={
+          <span>
+            <span className="text-navy">Rotaract Club</span>{' '}
+            <span className="text-gradient-primary">MEC Thrikkakara</span>
+          </span>
+        }
         subtitle="Service • Leadership • Fellowship"
         description="Empowering young leaders to make a positive impact through community service and meaningful engagement."
         cta={[
@@ -66,7 +72,7 @@ const HomePage = () => {
           className="mt-12"
         >
           <div className="flex justify-center">
-            <HiSparkles className="text-gold-400 text-6xl" />
+            <HiSparkles className="text-roseaccent text-6xl" />
           </div>
         </motion.div>
       </Hero>
@@ -100,18 +106,18 @@ const HomePage = () => {
           ].map((item, idx) => {
             const IconComponent = item.icon
             return (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.2 }}
-              className="glass-card-dark p-8 text-center"
-            >
-              <IconComponent className="mx-auto text-5xl text-pink-500 mb-4" />
-              <h3 className="text-2xl font-bold text-white mb-4">{item.title}</h3>
-              <p className="text-gray-300">{item.description}</p>
-            </motion.div>
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.2 }}
+                className="glass-card p-8 text-center"
+              >
+                <IconComponent className="mx-auto text-5xl text-roseaccent mb-4" />
+                <h3 className="text-2xl font-bold text-navy mb-4">{item.title}</h3>
+                <p className="text-textgray leading-relaxed">{item.description}</p>
+              </motion.div>
             )
           })}
         </div>
@@ -265,17 +271,17 @@ const HomePage = () => {
       )}
 
       {/* CTA Section */}
-      <Section className="bg-gradient-to-r from-primary-900 to-primary-800 bg-opacity-50 rounded-2xl">
+      <Section className="bg-gradient-to-r from-navy via-purpleaccent to-cranberry rounded-[20px] shadow-xl p-8 md:p-16">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           className="text-center py-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to Make a <span className="text-gradient">Difference?</span>
+          <h2 className="text-4xl md:text-5xl font-bold font-serif text-white mb-6">
+            Ready to Make a Difference?
           </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
             Join Rotaract Club MEC and become part of a community dedicated to
             service, leadership, and fellowship.
           </p>
@@ -288,9 +294,10 @@ const HomePage = () => {
             />
             <Button
               label="Contact Us"
-              href="#"
+              href="mailto:rotaract@mec.ac.in"
               variant="outline"
               size="lg"
+              className="border-white text-white hover:bg-white hover:text-navy"
             />
           </div>
         </motion.div>

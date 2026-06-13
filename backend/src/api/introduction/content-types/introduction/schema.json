@@ -1,0 +1,35 @@
+{
+  "kind": "singleType",
+  "collectionName": "introductions",
+  "info": {
+    "singularName": "introduction",
+    "pluralName": "introductions",
+    "displayName": "Introduction",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "vision": {
+      "type": "text"
+    },
+    "mission": {
+      "type": "text"
+    },
+    "purpose": {
+      "type": "text"
+    },
+    "history": {
+      "type": "text"
+    },
+    "values": {
+      "type": "json"
+    }
+  }
+}

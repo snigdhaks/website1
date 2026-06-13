@@ -5,6 +5,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        - VITE_STRAPI_API_URL=${VITE_STRAPI_API_URL}
+        - VITE_STRAPI_TOKEN=${VITE_STRAPI_TOKEN}
     container_name: rotaract-mec-website
     ports:
       - "80:80"
@@ -21,6 +24,23 @@ services:
       - rotaract-network
     volumes:
       - ./public:/usr/share/nginx/html/public:ro
+
+  rotaract-strapi:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: rotaract-mec-strapi
+    ports:
+      - "1337:1337"
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./backend/public/uploads:/opt/app/public/uploads
+      - ./backend/.tmp:/opt/app/.tmp
+      - ./backend/database:/opt/app/database
+    restart: unless-stopped
+    networks:
+      - rotaract-network
 
 networks:
   rotaract-network:

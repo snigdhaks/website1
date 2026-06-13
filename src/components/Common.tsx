@@ -20,7 +20,7 @@ export const Button: React.FC<ButtonProps> = ({
   className = '',
   disabled = false,
 }) => {
-  const baseClasses = 'font-semibold smooth-transition rounded-lg'
+  const baseClasses = 'font-semibold smooth-transition rounded-[14px]'
 
   const sizeClasses = {
     sm: 'px-4 py-2 text-sm',
@@ -29,9 +29,9 @@ export const Button: React.FC<ButtonProps> = ({
   }
 
   const variantClasses = {
-    primary: 'bg-gradient-primary text-white hover:shadow-lg hover:shadow-pink-500/50',
-    secondary: 'bg-pink-500 text-white hover:bg-pink-600',
-    outline: 'border-2 border-pink-500 text-pink-600 hover:bg-pink-500 hover:text-white',
+    primary: 'bg-gradient-to-r from-cranberry to-roseaccent text-white hover:shadow-premium',
+    secondary: 'bg-roseaccent text-white hover:bg-roseaccent/90',
+    outline: 'border-2 border-cranberry text-cranberry hover:bg-cranberry hover:text-white',
   }
 
   const content = (
@@ -84,12 +84,12 @@ export const Section: React.FC<SectionProps> = ({
           className="text-center mb-12 md:mb-16"
         >
           {title && (
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 font-sans text-navy">
               <span className="text-gradient">{title}</span>
             </h2>
           )}
           {subtitle && (
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto">{subtitle}</p>
+            <p className="text-textgray text-lg max-w-2xl mx-auto">{subtitle}</p>
           )}
         </motion.div>
       )}
@@ -99,7 +99,7 @@ export const Section: React.FC<SectionProps> = ({
 }
 
 interface HeroProps {
-  title: string
+  title: React.ReactNode
   subtitle?: string
   description?: string
   backgroundImage?: string
@@ -119,16 +119,47 @@ export const Hero: React.FC<HeroProps> = ({
     <div
       className="relative min-h-screen flex items-center justify-center pt-20 md:pt-24 px-4 overflow-hidden"
       style={{
-        background: 'linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,240,245,0.8) 50%, rgba(255,255,255,1) 100%)',
+        background: 'linear-gradient(135deg, #FFFFFF 0%, #FFF6FA 100%)',
         backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
-      {/* Decorative pink blobs */}
-      <div className="absolute top-20 left-10 w-64 h-64 bg-pink-200 rounded-full blur-3xl opacity-20" />
-      <div className="absolute bottom-40 right-20 w-96 h-96 bg-pink-300 rounded-full blur-3xl opacity-15" />
-      <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-pink-100 rounded-full blur-3xl opacity-15" />
+      {/* Subtle Rotaract gear watermark */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-hidden">
+        <svg
+          className="w-[450px] h-[450px] md:w-[650px] md:h-[650px] text-roseaccent opacity-[0.03]"
+          viewBox="0 0 100 100"
+          fill="currentColor"
+        >
+          <circle cx="50" cy="50" r="30" fill="none" stroke="currentColor" strokeWidth="8" />
+          <line x1="50" y1="10" x2="50" y2="90" stroke="currentColor" strokeWidth="6" />
+          <line x1="10" y1="50" x2="90" y2="50" stroke="currentColor" strokeWidth="6" />
+          <line x1="22" y1="22" x2="78" y2="78" stroke="currentColor" strokeWidth="6" />
+          <line x1="22" y1="78" x2="78" y2="22" stroke="currentColor" strokeWidth="6" />
+          <circle cx="50" cy="50" r="12" fill="white" stroke="currentColor" strokeWidth="4" />
+          {Array.from({ length: 16 }).map((_, i) => {
+            const angle = (i * 360) / 16;
+            return (
+              <rect
+                key={i}
+                x="46"
+                y="6"
+                width="8"
+                height="8"
+                rx="2"
+                transform={`rotate(${angle} 50 50)`}
+                fill="currentColor"
+              />
+            )
+          })}
+        </svg>
+      </div>
+
+      {/* Decorative blobs */}
+      <div className="absolute top-20 left-10 w-64 h-64 bg-blush rounded-full blur-3xl opacity-40" />
+      <div className="absolute bottom-40 right-20 w-96 h-96 bg-roseaccent rounded-full blur-3xl opacity-[0.05]" />
+      <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-purpleaccent rounded-full blur-3xl opacity-[0.03]" />
 
       {/* Content */}
       <div className="relative z-10 max-w-4xl mx-auto text-center">
@@ -142,7 +173,7 @@ export const Hero: React.FC<HeroProps> = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-pink-500 font-semibold text-lg md:text-xl mb-4"
+              className="text-roseaccent font-semibold text-lg md:text-xl mb-4"
             >
               {subtitle}
             </motion.p>
@@ -152,9 +183,9 @@ export const Hero: React.FC<HeroProps> = ({
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold font-serif mb-6 leading-tight text-navy"
           >
-            <span className="text-gradient">{title}</span>
+            {title}
           </motion.h1>
 
           {description && (
@@ -162,7 +193,7 @@ export const Hero: React.FC<HeroProps> = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="text-gray-600 text-lg md:text-xl mb-8 max-w-2xl mx-auto"
+              className="text-textgray text-lg md:text-xl mb-8 max-w-2xl mx-auto"
             >
               {description}
             </motion.p>
@@ -204,7 +235,7 @@ export const Hero: React.FC<HeroProps> = ({
       <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-400"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-textgray opacity-60"
       >
         <svg
           className="w-6 h-6"

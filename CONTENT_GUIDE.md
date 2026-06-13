@@ -2,7 +2,52 @@
 
 ## Overview
 
-All content for the Rotaract Club MEC website is managed through JSON files located in the `public/data/` directory. This guide explains how to update and manage content.
+Content for the Rotaract Club MEC website can be managed dynamically through **Strapi CMS** or locally through **JSON files** located in the `public/data/` directory. If the environment variable `VITE_STRAPI_API_URL` is set, the website loads content from Strapi; otherwise, it falls back to the local JSON files.
+
+---
+
+## Managing Content in Strapi
+
+### 1. Accessing the Admin Panel
+1. Open your browser and navigate to the Strapi Admin Panel:
+   * Local: `http://localhost:1337/admin`
+   * Production: `https://your-strapi-domain.com/admin`
+2. Log in using your admin or editor credentials.
+
+### 2. Navigating content types
+In the left sidebar, click on the **Content Manager**:
+* **Collection Types** (Multi-item data):
+  * **Blogs**: Create, edit, or delete articles. Supports Markdown formatting in the content body.
+  * **Events**: Add new events with categories, dates, times, locations, and registration links.
+  * **Coordinators**: Update team coordinators, titles, departments, and social links.
+  * **Activities**: Add recent highlight activities and detail parameters.
+* **Single Types** (Single-page layouts):
+  * **Introduction**: Update page header values, vision, mission, purpose statements, and core value lists.
+  * **Membership**: Update application process step descriptions, eligibility requirements, and emails.
+
+### 3. Creating & Editing Entries
+1. Select the content type from the sidebar.
+2. Click **Create new entry** or select an existing one to edit it.
+3. Fill in the fields:
+   * **Images**: Upload directly to the media field. The site will automatically prepend your Strapi base URL.
+   * **Markdown**: The main content editor supports rich text markdown syntax.
+4. Click **Save** to store changes.
+
+> [!IMPORTANT]
+> **Draft vs. Publish:** In Strapi, changes are saved as a "Draft" by default. You MUST click the **Publish** button in the top right for changes to become live and accessible to the website.
+
+### 4. Activating API Permissions (Public Access)
+By default, Strapi restricts public access to new content type API endpoints. To make content visible on the website:
+1. In the Strapi Admin Panel sidebar, navigate to **Settings** (under the General section).
+2. Go to **Users & Permissions Plugin** > **Roles**.
+3. Click on the **Public** role.
+4. Expand the permissions for each of your content types (Activities, Blogs, Coordinators, Events, Introduction, Membership).
+5. Check the boxes for **find** and **findOne** (or **find** only for Single Types).
+6. Click **Save** in the top right.
+
+*Note: Alternatively, if you want to keep the endpoints private, you can generate an API Token in **Settings** > **API Tokens** and set it as `VITE_STRAPI_TOKEN` in your `.env` file.*
+
+---
 
 ## File Locations
 

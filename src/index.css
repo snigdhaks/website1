@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;500&family=Raleway:wght@700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -13,18 +13,18 @@ html {
 }
 
 body {
-  background: linear-gradient(135deg, rgba(255,255,255,1) 0%, rgba(255,240,245,0.6) 50%, rgba(255,250,252,1) 100%);
+  background: linear-gradient(135deg, #FFFFFF 0%, #FFF6FA 100%);
   background-attachment: fixed;
-  @apply text-gray-900;
-  font-family: 'Lato', sans-serif;
+  @apply text-textgray;
+  font-family: 'Inter', sans-serif;
   font-weight: 400;
   position: relative;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 700;
-  @apply text-pink-700;
+  @apply text-navy;
 }
 
 ::-webkit-scrollbar {
@@ -32,47 +32,47 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-gray-100;
+  @apply bg-blush;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-pink-500 rounded-full;
+  @apply bg-cranberry rounded-full;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-pink-600;
+  @apply bg-roseaccent;
 }
 
 .glass-card {
-  @apply backdrop-blur-md bg-gradient-to-br from-white via-pink-50 to-pink-100 border border-pink-200 rounded-xl shadow-lg;
+  @apply bg-white border border-gray-100/80 rounded-2xl shadow-soft;
 }
 
 .glass-card-dark {
-  @apply backdrop-blur-md bg-gradient-to-br from-white via-pink-50 to-pink-100 border border-pink-200 rounded-xl shadow-lg;
+  @apply bg-white border border-gray-100/80 rounded-2xl shadow-soft;
 }
 
 .gradient-gold {
-  @apply bg-gradient-to-r from-pink-400 to-pink-500;
+  @apply bg-gradient-to-r from-cranberry via-roseaccent to-purpleaccent;
 }
 
 .gradient-primary {
-  @apply bg-gradient-to-r from-pink-500 to-pink-600;
+  @apply bg-gradient-to-r from-cranberry to-roseaccent;
 }
 
 .text-gradient {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-600 via-pink-500 to-pink-700;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-cranberry via-roseaccent to-purpleaccent;
 }
 
 .text-gradient-primary {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-600 to-pink-800;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-cranberry to-roseaccent;
 }
 
 .gradient-section {
-  @apply bg-gradient-to-br from-pink-50 via-white to-pink-100;
+  @apply bg-gradient-to-br from-white via-blush to-white;
 }
 
 .premium-heading {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-pink-700 to-pink-500 font-bold;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-navy via-cranberry to-roseaccent font-bold font-serif;
 }
 
 .smooth-transition {

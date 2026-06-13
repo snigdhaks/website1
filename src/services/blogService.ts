@@ -1,25 +1,39 @@
 import { Blog } from '@/types'
-
-const BLOGS_URL = '/data/blogs.json'
+import {
+  fetchStrapi,
+  normalizeStrapiArray,
+  normalizeStrapiItem,
+} from './strapi'
 
 export const blogService = {
   async getAll(): Promise<Blog[]> {
     try {
-      const response = await fetch(BLOGS_URL)
-      if (!response.ok) throw new Error('Failed to fetch blogs')
-      return await response.json()
+      const response = await fetchStrapi('/api/blogs?populate=*')
+      if (response) {
+        return normalizeStrapiArray<Blog>(response)
+      }
+      return []
     } catch (error) {
-      console.error('Error fetching blogs:', error)
+      console.error('Error fetching blogs from Strapi:', error)
       return []
     }
   },
 
   async getById(id: string): Promise<Blog | null> {
     try {
-      const blogs = await this.getAll()
-      return blogs.find((b) => b.id === id) || null
+      if (/^\d+$/.test(id)) {
+        const listResponse = await fetchStrapi(`/api/blogs?filters[id][$eq]=${id}&populate=*`)
+        if (listResponse && listResponse.data && listResponse.data.length > 0) {
+          return normalizeStrapiItem<Blog>(listResponse.data[0])
+        }
+      }
+      const response = await fetchStrapi(`/api/blogs/${id}?populate=*`)
+      if (response && response.data) {
+        return normalizeStrapiItem<Blog>(response.data)
+      }
+      return null
     } catch (error) {
-      console.error('Error fetching blog:', error)
+      console.error(`Error fetching blog by ID ${id} from Strapi:`, error)
       return null
     }
   },

@@ -1,25 +1,39 @@
 import { Activity } from '@/types'
-
-const ACTIVITIES_URL = '/data/activities.json'
+import {
+  fetchStrapi,
+  normalizeStrapiArray,
+  normalizeStrapiItem,
+} from './strapi'
 
 export const activityService = {
   async getAll(): Promise<Activity[]> {
     try {
-      const response = await fetch(ACTIVITIES_URL)
-      if (!response.ok) throw new Error('Failed to fetch activities')
-      return await response.json()
+      const response = await fetchStrapi('/api/activities?populate=*')
+      if (response) {
+        return normalizeStrapiArray<Activity>(response)
+      }
+      return []
     } catch (error) {
-      console.error('Error fetching activities:', error)
+      console.error('Error fetching activities from Strapi:', error)
       return []
     }
   },
 
   async getById(id: string): Promise<Activity | null> {
     try {
-      const activities = await this.getAll()
-      return activities.find((a) => a.id === id) || null
+      if (/^\d+$/.test(id)) {
+        const listResponse = await fetchStrapi(`/api/activities?filters[id][$eq]=${id}&populate=*`)
+        if (listResponse && listResponse.data && listResponse.data.length > 0) {
+          return normalizeStrapiItem<Activity>(listResponse.data[0])
+        }
+      }
+      const response = await fetchStrapi(`/api/activities/${id}?populate=*`)
+      if (response && response.data) {
+        return normalizeStrapiItem<Activity>(response.data)
+      }
+      return null
     } catch (error) {
-      console.error('Error fetching activity:', error)
+      console.error(`Error fetching activity by ID ${id} from Strapi:`, error)
       return null
     }
   },

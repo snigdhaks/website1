@@ -8,6 +8,12 @@ export default {
   theme: {
     extend: {
       colors: {
+        cranberry: '#D91B5C',
+        roseaccent: '#E83E8C',
+        navy: '#0F172A',
+        purpleaccent: '#5B2C83',
+        blush: '#FFF6FA',
+        textgray: '#475569',
         primary: {
           50: '#fdf2f8',
           100: '#fce7f3',
@@ -49,6 +55,10 @@ export default {
           950: '#0f0f0f',
         },
       },
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        serif: ['"Playfair Display"', 'serif'],
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
@@ -64,6 +74,8 @@ export default {
         'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.1)',
         'glow': '0 0 20px rgba(245, 158, 63, 0.3)',
         'glow-primary': '0 0 20px rgba(90, 127, 255, 0.3)',
+        'soft': '0 8px 30px rgba(15, 23, 42, 0.04)',
+        'premium': '0 10px 30px -10px rgba(217, 27, 92, 0.15)',
       },
     },
   },

@@ -1,25 +1,39 @@
 import { Event } from '@/types'
-
-const EVENTS_URL = '/data/events.json'
+import {
+  fetchStrapi,
+  normalizeStrapiArray,
+  normalizeStrapiItem,
+} from './strapi'
 
 export const eventService = {
   async getAll(): Promise<Event[]> {
     try {
-      const response = await fetch(EVENTS_URL)
-      if (!response.ok) throw new Error('Failed to fetch events')
-      return await response.json()
+      const response = await fetchStrapi('/api/events?populate=*')
+      if (response) {
+        return normalizeStrapiArray<Event>(response)
+      }
+      return []
     } catch (error) {
-      console.error('Error fetching events:', error)
+      console.error('Error fetching events from Strapi:', error)
       return []
     }
   },
 
   async getById(id: string): Promise<Event | null> {
     try {
-      const events = await this.getAll()
-      return events.find((e) => e.id === id) || null
+      if (/^\d+$/.test(id)) {
+        const listResponse = await fetchStrapi(`/api/events?filters[id][$eq]=${id}&populate=*`)
+        if (listResponse && listResponse.data && listResponse.data.length > 0) {
+          return normalizeStrapiItem<Event>(listResponse.data[0])
+        }
+      }
+      const response = await fetchStrapi(`/api/events/${id}?populate=*`)
+      if (response && response.data) {
+        return normalizeStrapiItem<Event>(response.data)
+      }
+      return null
     } catch (error) {
-      console.error('Error fetching event:', error)
+      console.error(`Error fetching event by ID ${id} from Strapi:`, error)
       return null
     }
   },

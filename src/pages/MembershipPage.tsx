@@ -5,6 +5,7 @@ import { FiTarget } from 'react-icons/fi'
 import PageHeader from '@/components/PageHeader'
 import { Section, Button } from '@/components/Common'
 import { useSEO } from '@/hooks'
+import { fetchStrapi, normalizeStrapiItem } from '@/services/strapi'
 
 interface MembershipData {
   title: string
@@ -39,11 +40,12 @@ const MembershipPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/data/content.json')
-        const json = await response.json()
-        setData(json.membership)
+        const response = await fetchStrapi('/api/membership?populate=*')
+        if (response && response.data) {
+          setData(normalizeStrapiItem<MembershipData>(response.data))
+        }
       } catch (error) {
-        console.error('Error fetching membership data:', error)
+        console.error('Error fetching membership data from Strapi:', error)
       }
     }
     fetchData()
@@ -69,13 +71,13 @@ const MembershipPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="glass-card-dark p-8 hover:shadow-glow smooth-transition"
+              className="glass-card p-8 hover:shadow-md smooth-transition"
             >
               <div className="text-5xl mb-4">{benefit.icon}</div>
-              <h3 className="text-xl font-bold text-white mb-3">
+              <h3 className="text-xl font-bold text-navy mb-3">
                 {benefit.title}
               </h3>
-              <p className="text-gray-300 text-sm leading-relaxed">
+              <p className="text-textgray text-sm leading-relaxed">
                 {benefit.description}
               </p>
             </motion.div>
@@ -89,7 +91,7 @@ const MembershipPage = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass-card-dark p-12 max-w-3xl mx-auto"
+          className="glass-card p-12 max-w-3xl mx-auto"
         >
           <ul className="space-y-4">
             {data.eligibility.map((criterion, idx) => (
@@ -99,9 +101,9 @@ const MembershipPage = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="flex items-start text-lg text-gray-300"
+                className="flex items-start text-lg text-textgray"
               >
-                <HiCheckCircle className="text-gold-400 mr-4 mt-1 text-lg flex-shrink-0" />
+                <HiCheckCircle className="text-roseaccent mr-4 mt-1 text-lg flex-shrink-0" />
                 <span>{criterion}</span>
               </motion.li>
             ))}
@@ -114,11 +116,11 @@ const MembershipPage = () => {
         <div className="max-w-4xl mx-auto">
           {/* Timeline */}
           <div className="relative mb-12">
-            <div className="flex justify-between relative">
+            <div className="flex justify-between relative z-10">
               {data.process.map((_, idx) => (
                 <div
                   key={idx}
-                  className="flex-1"
+                  className="flex-1 cursor-pointer"
                   onClick={() => setSelectedProcess(idx)}
                 >
                   <motion.div
@@ -129,17 +131,17 @@ const MembershipPage = () => {
                     transition={{ delay: idx * 0.1 }}
                   >
                     <button
-                      className={`w-12 h-12 rounded-full font-bold text-lg smooth-transition cursor-pointer ${
+                      className={`w-12 h-12 rounded-full font-bold text-lg smooth-transition ${
                         selectedProcess === idx
-                          ? 'bg-gradient-gold text-dark-950 shadow-lg shadow-gold-500/50'
-                          : 'bg-primary-600 text-white hover:bg-primary-500'
+                          ? 'bg-cranberry text-white shadow-premium'
+                          : 'bg-blush text-cranberry border border-cranberry/25 hover:bg-cranberry/10'
                       }`}
                     >
                       {idx + 1}
                     </button>
                   </motion.div>
                   {idx < data.process.length - 1 && (
-                    <div className="absolute top-6 left-1/2 w-[calc(100%-2rem)] h-1 bg-primary-600 -z-10" />
+                    <div className="absolute top-6 left-1/2 w-[calc(100%-2rem)] h-1 bg-cranberry/20 -z-10" />
                   )}
                 </div>
               ))}
@@ -152,24 +154,24 @@ const MembershipPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="glass-card-dark p-8 text-center"
+            className="glass-card p-8 text-center"
           >
             <div className="mb-6">
               <h3 className="text-3xl font-bold text-gradient mb-2">
                 Step {data.process[selectedProcess].step}
               </h3>
-              <h4 className="text-2xl font-semibold text-white">
+              <h4 className="text-2xl font-semibold text-navy">
                 {data.process[selectedProcess].title}
               </h4>
             </div>
-            <p className="text-lg text-gray-300 leading-relaxed">
+            <p className="text-lg text-textgray leading-relaxed">
               {data.process[selectedProcess].description}
             </p>
             {selectedProcess < data.process.length - 1 && (
               <div className="mt-8">
                 <button
                   onClick={() => setSelectedProcess(selectedProcess + 1)}
-                  className="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg smooth-transition"
+                  className="px-6 py-2.5 bg-cranberry hover:bg-cranberry/90 text-white rounded-[14px] smooth-transition font-semibold hover:shadow-premium"
                 >
                   Next Step →
                 </button>
@@ -196,11 +198,11 @@ const MembershipPage = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="glass-card-dark p-8 text-center"
+                className="glass-card p-8 text-center"
               >
-                <IconComponent className="mx-auto text-5xl text-pink-500 mb-4" />
-                <h3 className="text-3xl font-bold text-white mb-2">{fact.number}</h3>
-                <p className="text-gray-400">{fact.label}</p>
+                <IconComponent className="mx-auto text-5xl text-roseaccent mb-4" />
+                <h3 className="text-3xl font-bold text-navy mb-2">{fact.number}</h3>
+                <p className="text-textgray font-medium">{fact.label}</p>
               </motion.div>
             )
           })}
@@ -208,26 +210,26 @@ const MembershipPage = () => {
       </Section>
 
       {/* CTA Section */}
-      <Section className="bg-gradient-to-r from-gold-500 via-gold-600 to-primary-600 bg-opacity-20 rounded-2xl">
+      <Section className="bg-gradient-to-r from-navy via-purpleaccent to-cranberry rounded-[20px] shadow-xl p-8 md:p-16">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           className="text-center py-12"
         >
-          <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          <h3 className="text-4xl md:text-5xl font-bold font-serif text-white mb-6">
             Ready to Join Us?
           </h3>
-          <p className="text-xl text-gray-300 mb-2">
+          <p className="text-xl text-white/80 mb-2">
             Send us an email or fill out the application form
           </p>
-          <p className="text-gold-400 font-semibold text-lg mb-8">
+          <p className="text-roseaccent font-bold text-2xl mb-8">
             {data.contactEmail}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href={`mailto:${data.contactEmail}`}
-              className="px-8 py-3 bg-gradient-gold text-dark-950 font-semibold rounded-lg hover:shadow-lg hover:shadow-gold-500/50 smooth-transition"
+              className="px-8 py-3 bg-cranberry text-white font-semibold rounded-[14px] hover:bg-cranberry/90 smooth-transition hover:shadow-premium flex items-center justify-center"
             >
               Send Email
             </a>
@@ -236,6 +238,7 @@ const MembershipPage = () => {
               variant="outline"
               size="lg"
               href="#"
+              className="border-white text-white hover:bg-white hover:text-navy"
             />
           </div>
         </motion.div>
@@ -272,12 +275,12 @@ const MembershipPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="glass-card-dark p-6"
+              className="glass-card p-6"
             >
-              <h4 className="text-lg font-bold text-gold-400 mb-3">
+              <h4 className="text-lg font-bold text-navy mb-3">
                 {faq.question}
               </h4>
-              <p className="text-gray-300 text-sm">{faq.answer}</p>
+              <p className="text-textgray text-sm leading-relaxed">{faq.answer}</p>
             </motion.div>
           ))}
         </div>

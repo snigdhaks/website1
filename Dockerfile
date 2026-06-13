@@ -12,7 +12,12 @@ RUN npm ci
 # Copy source code
 COPY . .
 
-# Build the application
+# Build the application with Strapi build arguments
+ARG VITE_STRAPI_API_URL
+ARG VITE_STRAPI_TOKEN
+ENV VITE_STRAPI_API_URL=$VITE_STRAPI_API_URL
+ENV VITE_STRAPI_TOKEN=$VITE_STRAPI_TOKEN
+
 RUN npm run build
 
 # Production stage

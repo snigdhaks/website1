@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import PageHeader from '@/components/PageHeader'
 import { Section } from '@/components/Common'
 import { useSEO } from '@/hooks'
+import { fetchStrapi, normalizeStrapiItem } from '@/services/strapi'
 
 interface IntroductionData {
   title: string
@@ -26,11 +27,12 @@ const IntroductionPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('/data/content.json')
-        const json = await response.json()
-        setData(json.introduction)
+        const response = await fetchStrapi('/api/introduction?populate=*')
+        if (response && response.data) {
+          setData(normalizeStrapiItem<IntroductionData>(response.data))
+        }
       } catch (error) {
-        console.error('Error fetching introduction data:', error)
+        console.error('Error fetching introduction data from Strapi:', error)
       }
     }
     fetchData()
@@ -53,10 +55,10 @@ const IntroductionPage = () => {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="glass-card-dark p-8"
+            className="glass-card p-8"
           >
-            <h3 className="text-3xl font-bold text-gradient mb-4">Vision</h3>
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <h3 className="text-3xl font-bold text-gradient mb-4 font-serif">Vision</h3>
+            <p className="text-textgray text-lg leading-relaxed">
               {data.vision}
             </p>
           </motion.div>
@@ -65,10 +67,10 @@ const IntroductionPage = () => {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="glass-card-dark p-8"
+            className="glass-card p-8"
           >
-            <h3 className="text-3xl font-bold text-gradient mb-4">Mission</h3>
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <h3 className="text-3xl font-bold text-gradient mb-4 font-serif">Mission</h3>
+            <p className="text-textgray text-lg leading-relaxed">
               {data.mission}
             </p>
           </motion.div>
@@ -81,9 +83,9 @@ const IntroductionPage = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass-card-dark p-12 max-w-3xl mx-auto text-center"
+          className="glass-card p-12 max-w-3xl mx-auto text-center"
         >
-          <p className="text-xl text-gray-300 leading-relaxed">
+          <p className="text-xl text-textgray leading-relaxed">
             {data.purpose}
           </p>
         </motion.div>
@@ -95,24 +97,24 @@ const IntroductionPage = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="glass-card-dark p-12 max-w-3xl mx-auto"
+          className="glass-card p-12 max-w-3xl mx-auto"
         >
-          <p className="text-lg text-gray-300 leading-relaxed mb-6">
+          <p className="text-lg text-textgray leading-relaxed mb-6">
             {data.history}
           </p>
-          <div className="border-t border-white border-opacity-10 pt-8 mt-8">
+          <div className="border-t border-gray-100 pt-8 mt-8">
             <div className="grid grid-cols-3 gap-4 text-center">
               <div>
                 <div className="text-4xl font-bold text-gradient">2015</div>
-                <p className="text-gray-400 mt-2">Founded</p>
+                <p className="text-textgray mt-2">Founded</p>
               </div>
               <div>
                 <div className="text-4xl font-bold text-gradient">200+</div>
-                <p className="text-gray-400 mt-2">Active Members</p>
+                <p className="text-textgray mt-2">Active Members</p>
               </div>
               <div>
                 <div className="text-4xl font-bold text-gradient">50+</div>
-                <p className="text-gray-400 mt-2">Projects</p>
+                <p className="text-textgray mt-2">Projects</p>
               </div>
             </div>
           </div>
@@ -129,17 +131,17 @@ const IntroductionPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="glass-card-dark p-8"
+              className="glass-card p-8"
             >
-              <div className="w-16 h-16 rounded-lg bg-gradient-gold bg-opacity-20 flex items-center justify-center mb-4">
-                <span className="text-2xl font-bold text-gold-400">
+              <div className="w-16 h-16 rounded-lg bg-roseaccent/10 flex items-center justify-center mb-4">
+                <span className="text-2xl font-bold text-roseaccent">
                   {idx + 1}
                 </span>
               </div>
-              <h4 className="text-xl font-bold text-white mb-3">
+              <h4 className="text-xl font-bold text-navy mb-3">
                 {value.title}
               </h4>
-              <p className="text-gray-300 text-sm leading-relaxed">
+              <p className="text-textgray text-sm leading-relaxed">
                 {value.description}
               </p>
             </motion.div>
@@ -173,37 +175,37 @@ const IntroductionPage = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="glass-card-dark p-8 text-center"
+              className="glass-card p-8 text-center"
             >
-              <div className="text-5xl font-bold text-gradient mb-4">
+              <div className="text-5xl font-bold text-gradient mb-4 font-serif">
                 {stat.number}
               </div>
-              <h4 className="text-xl font-bold text-white mb-2">
+              <h4 className="text-xl font-bold text-navy mb-2">
                 {stat.label}
               </h4>
-              <p className="text-gray-400 text-sm">{stat.description}</p>
+              <p className="text-textgray text-sm">{stat.description}</p>
             </motion.div>
           ))}
         </div>
       </Section>
 
       {/* Call to Action */}
-      <Section className="bg-gradient-to-r from-gold-500 via-gold-600 to-primary-600 bg-opacity-20 rounded-2xl">
+      <Section className="bg-gradient-to-r from-navy via-purpleaccent to-cranberry rounded-[20px] shadow-xl p-8 md:p-16">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="text-center py-12"
         >
-          <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h3 className="text-3xl md:text-4xl font-bold font-serif text-white mb-6">
             Join Our Community Today
           </h3>
-          <p className="text-lg text-gray-300 mb-8">
+          <p className="text-lg text-white/80 mb-8">
             Be part of a movement that's changing lives and building leaders
           </p>
           <a
             href="/membership"
-            className="inline-block px-8 py-3 bg-gradient-gold text-dark-950 font-semibold rounded-lg hover:shadow-lg hover:shadow-gold-500/50 smooth-transition"
+            className="inline-block px-8 py-3 bg-cranberry text-white font-semibold rounded-[14px] hover:bg-cranberry/90 smooth-transition hover:shadow-premium"
           >
             Become a Member
           </a>

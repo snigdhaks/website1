@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blogs",
+  "info": {
+    "singularName": "blog",
+    "pluralName": "blogs",
+    "displayName": "Blog",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "author": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date"
+    },
+    "coverImage": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "content": {
+      "type": "richtext"
+    },
+    "excerpt": {
+      "type": "text"
+    },
+    "tags": {
+      "type": "json"
+    },
+    "category": {
+      "type": "string"
+    }
+  }
+}

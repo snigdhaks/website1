@@ -71,38 +71,38 @@ export const CoordinatorCard: React.FC<{
             />
           </motion.div>
         )}
-        <h3 className="text-xl font-bold text-gray-900 mb-1">{name}</h3>
-        <p className="text-pink-600 font-semibold mb-1">{role}</p>
+        <h3 className="text-xl font-bold text-navy mb-1">{name}</h3>
+        <p className="text-roseaccent font-semibold mb-1">{role}</p>
         {department && (
-          <p className="text-sm text-gray-600 mb-3">{department}</p>
+          <p className="text-sm text-textgray mb-3">{department}</p>
         )}
         {description && (
-          <p className="text-gray-700 text-sm mb-4">{description}</p>
+          <p className="text-textgray text-sm mb-4 leading-relaxed">{description}</p>
         )}
         {social && (
-          <div className="flex justify-center gap-3 pt-4 border-t border-pink-200">
+          <div className="flex justify-center gap-3 pt-4 border-t border-gray-100">
             {social.facebook && (
               <a
                 href={social.facebook}
-                className="text-gray-600 hover:text-pink-600 smooth-transition"
+                className="text-textgray hover:text-roseaccent smooth-transition font-medium"
               >
-                f
+                Facebook
               </a>
             )}
             {social.instagram && (
               <a
                 href={social.instagram}
-                className="text-gray-600 hover:text-pink-600 smooth-transition"
+                className="text-textgray hover:text-roseaccent smooth-transition font-medium"
               >
-                ig
+                Instagram
               </a>
             )}
             {social.linkedin && (
               <a
                 href={social.linkedin}
-                className="text-gray-600 hover:text-pink-600 smooth-transition"
+                className="text-textgray hover:text-roseaccent smooth-transition font-medium"
               >
-                in
+                LinkedIn
               </a>
             )}
           </div>
@@ -130,13 +130,13 @@ export const EventCard: React.FC<{
           <img src={image} alt={title} className="w-full h-40 object-cover" />
         </motion.div>
       )}
-      <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
+      <h3 className="text-xl font-bold text-navy mb-2">{title}</h3>
       <div className="space-y-2 mb-4">
-        <p className="text-sm text-gold-400 font-medium">{date}</p>
-        {location && <p className="text-sm text-gray-400">{location}</p>}
+        <p className="text-sm text-roseaccent font-semibold">{date}</p>
+        {location && <p className="text-sm text-textgray">{location}</p>}
       </div>
       {description && (
-        <p className="text-gray-300 text-sm mb-4">{description}</p>
+        <p className="text-textgray text-sm mb-4 leading-relaxed">{description}</p>
       )}
       {registrationLink && (
         <motion.a
@@ -144,7 +144,7 @@ export const EventCard: React.FC<{
           href={registrationLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block px-4 py-2 bg-gradient-gold text-dark-950 font-semibold rounded-lg hover:shadow-lg smooth-transition"
+          className="inline-block px-5 py-2.5 bg-cranberry text-white font-semibold rounded-[14px] hover:shadow-premium hover:bg-cranberry/90 smooth-transition text-sm"
         >
           Register Now
         </motion.a>
@@ -176,25 +176,25 @@ export const BlogCard: React.FC<{
           />
         </motion.div>
       )}
-      <h3 className="text-xl font-bold text-white mb-2 line-clamp-2">
+      <h3 className="text-xl font-bold text-navy mb-2 line-clamp-2">
         {title}
       </h3>
-      <div className="flex items-center gap-2 text-sm text-gray-400 mb-3">
+      <div className="flex items-center gap-2 text-sm text-textgray mb-3">
         <span>{author}</span>
         <span>•</span>
         <span>{date}</span>
       </div>
       {excerpt && (
-        <p className="text-gray-300 text-sm mb-4 line-clamp-3">{excerpt}</p>
+        <p className="text-textgray text-sm mb-4 line-clamp-3 leading-relaxed">{excerpt}</p>
       )}
       {tags && tags.length > 0 && (
         <div className="flex flex-wrap gap-2">
           {tags.map((tag) => (
             <span
               key={tag}
-              className="text-xs px-2 py-1 bg-primary-600 bg-opacity-20 text-primary-300 rounded-full"
+              className="text-xs px-2.5 py-1 bg-roseaccent/10 text-roseaccent font-medium rounded-full"
             >
-              {tag}
+              #{tag}
             </span>
           ))}
         </div>
@@ -224,14 +224,14 @@ export const ActivityCard: React.FC<{
           />
         </motion.div>
       )}
-      <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
+      <h3 className="text-xl font-bold text-navy mb-2">{title}</h3>
       {category && (
-        <span className="inline-block px-3 py-1 bg-gold-500 bg-opacity-20 text-gold-400 text-xs font-semibold rounded-full mb-3">
+        <span className="inline-block px-2.5 py-1 bg-roseaccent/10 text-roseaccent text-xs font-semibold rounded-full mb-3">
           {category}
         </span>
       )}
-      <p className="text-gray-300 text-sm mb-3">{description}</p>
-      {date && <p className="text-xs text-gray-500">{date}</p>}
+      <p className="text-textgray text-sm mb-3 leading-relaxed">{description}</p>
+      {date && <p className="text-xs text-textgray opacity-80">{date}</p>}
     </GlassCard>
   )
 }

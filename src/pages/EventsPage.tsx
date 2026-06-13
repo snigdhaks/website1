@@ -76,10 +76,10 @@ const EventsPage = () => {
             <button
               key={tab}
               onClick={() => setActiveTab(tab as 'upcoming' | 'past')}
-              className={`px-8 py-3 font-semibold rounded-lg smooth-transition text-lg ${
+              className={`px-8 py-3 font-semibold rounded-[14px] smooth-transition text-lg ${
                 activeTab === tab
-                  ? 'bg-gradient-gold text-dark-950 shadow-lg shadow-gold-500/50'
-                  : 'glass-card-dark text-gold-400 hover:text-gold-300'
+                  ? 'bg-cranberry text-white shadow-premium'
+                  : 'bg-white text-textgray border border-gray-100 hover:text-cranberry hover:shadow-sm'
               }`}
             >
               {tab === 'upcoming' ? 'Upcoming Events' : 'Past Events'}
@@ -90,13 +90,13 @@ const EventsPage = () => {
         {loading ? (
           <div className="text-center py-12">
             <div className="inline-block animate-spin">
-              <div className="w-12 h-12 border-4 border-gold-500 border-t-transparent rounded-full" />
+              <div className="w-12 h-12 border-4 border-cranberry border-t-transparent rounded-full" />
             </div>
-            <p className="text-gray-400 mt-4">Loading events...</p>
+            <p className="text-textgray mt-4">Loading events...</p>
           </div>
         ) : displayEvents.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-400 text-lg">
+            <p className="text-textgray text-lg">
               No {activeTab} events found
             </p>
           </div>
@@ -133,30 +133,30 @@ const EventsPage = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="glass-card-dark p-8"
+          className="glass-card p-8"
         >
           <div className="mb-6">
-            <h3 className="text-2xl font-bold text-white mb-4">
+            <h3 className="text-2xl font-bold text-navy mb-4">
               Monthly Overview
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="p-6 bg-dark-800 rounded-lg border border-white border-opacity-10">
-                <h4 className="text-lg font-semibold text-gold-400 mb-4 flex items-center gap-2">
+              <div className="p-6 bg-blush rounded-xl border border-cranberry/10">
+                <h4 className="text-lg font-semibold text-cranberry mb-4 flex items-center gap-2">
                   <HiCalendar /> Upcoming Events
                 </h4>
-                <p className="text-4xl font-bold text-white mb-2">
+                <p className="text-4xl font-bold text-navy mb-2">
                   {upcomingEvents.length}
                 </p>
-                <p className="text-gray-400">events planned</p>
+                <p className="text-textgray">events planned</p>
               </div>
-              <div className="p-6 bg-dark-800 rounded-lg border border-white border-opacity-10">
-                <h4 className="text-lg font-semibold text-gold-400 mb-4 flex items-center gap-2">
+              <div className="p-6 bg-blush rounded-xl border border-cranberry/10">
+                <h4 className="text-lg font-semibold text-cranberry mb-4 flex items-center gap-2">
                   <HiChartBar /> Past Events
                 </h4>
-                <p className="text-4xl font-bold text-white mb-2">
+                <p className="text-4xl font-bold text-navy mb-2">
                   {pastEvents.length}
                 </p>
-                <p className="text-gray-400">events completed</p>
+                <p className="text-textgray">events completed</p>
               </div>
             </div>
           </div>
@@ -174,17 +174,17 @@ const EventsPage = () => {
           ].map((category, idx) => {
             const IconComponent = category.icon
             return (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="glass-card-dark p-6 text-center hover:shadow-glow smooth-transition"
-            >
-              <IconComponent className="text-4xl mx-auto mb-3 text-pink-500" />
-              <h4 className="text-lg font-bold text-white">{category.name}</h4>
-            </motion.div>
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="glass-card p-6 text-center hover:shadow-md smooth-transition"
+              >
+                <IconComponent className="text-4xl mx-auto mb-3 text-roseaccent" />
+                <h4 className="text-lg font-bold text-navy">{category.name}</h4>
+              </motion.div>
             )
           })}
         </div>
@@ -195,13 +195,12 @@ const EventsPage = () => {
         <Section
           title="Featured Event"
           id="featured"
-          className="bg-gradient-to-r from-primary-900 to-primary-800 bg-opacity-50 rounded-2xl"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="glass-card-dark p-8 md:p-12 max-w-3xl mx-auto"
+            className="glass-card p-8 md:p-12 max-w-3xl mx-auto"
           >
             {upcomingEvents[0].image && (
               <div className="mb-8 overflow-hidden rounded-lg h-64 md:h-80">
@@ -212,12 +211,12 @@ const EventsPage = () => {
                 />
               </div>
             )}
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <h3 className="text-3xl md:text-4xl font-bold text-navy mb-4 font-serif">
               {upcomingEvents[0].title}
             </h3>
-            <div className="space-y-3 mb-6 text-gray-300">
+            <div className="space-y-3 mb-6 text-textgray">
               <p className="flex items-center gap-2">
-                <HiCalendar className="text-gold-400" />
+                <HiCalendar className="text-roseaccent" />
                 {new Date(upcomingEvents[0].date).toLocaleDateString('en-US', {
                   weekday: 'long',
                   year: 'numeric',
@@ -227,19 +226,19 @@ const EventsPage = () => {
               </p>
               {upcomingEvents[0].time && (
                 <p className="flex items-center gap-2">
-                  <HiClock className="text-gold-400" />
+                  <HiClock className="text-roseaccent" />
                   {upcomingEvents[0].time}
                 </p>
               )}
               {upcomingEvents[0].location && (
                 <p className="flex items-center gap-2">
-                  <HiLocationMarker className="text-gold-400" />
+                  <HiLocationMarker className="text-roseaccent" />
                   {upcomingEvents[0].location}
                 </p>
               )}
             </div>
             {upcomingEvents[0].description && (
-              <p className="text-lg text-gray-300 mb-8 leading-relaxed">
+              <p className="text-lg text-textgray mb-8 leading-relaxed">
                 {upcomingEvents[0].description}
               </p>
             )}
@@ -248,7 +247,7 @@ const EventsPage = () => {
                 href={upcomingEvents[0].registrationLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block px-8 py-3 bg-gradient-gold text-dark-950 font-semibold rounded-lg hover:shadow-lg hover:shadow-gold-500/50 smooth-transition"
+                className="inline-block px-8 py-3 bg-cranberry text-white font-semibold rounded-[14px] hover:bg-cranberry/90 smooth-transition hover:shadow-premium"
               >
                 Register Now
               </a>
@@ -258,26 +257,26 @@ const EventsPage = () => {
       )}
 
       {/* Newsletter Section */}
-      <Section className="bg-gradient-to-r from-gold-500 via-gold-600 to-primary-600 bg-opacity-20 rounded-2xl">
+      <Section className="bg-gradient-to-r from-navy via-purpleaccent to-cranberry rounded-[20px] shadow-xl p-8 md:p-16">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="text-center py-12"
         >
-          <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h3 className="text-3xl md:text-4xl font-bold font-serif text-white mb-6">
             Don't Miss Any Events
           </h3>
-          <p className="text-lg text-gray-300 mb-8">
+          <p className="text-lg text-white/80 mb-8">
             Subscribe to get updates on our latest events
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-lg bg-dark-800 border border-white border-opacity-20 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400"
+              className="flex-1 px-4 py-3 rounded-[14px] bg-white border border-gray-100 text-navy placeholder-textgray/60 focus:outline-none focus:border-cranberry"
             />
-            <button className="px-6 py-3 bg-gradient-gold text-dark-950 font-semibold rounded-lg hover:shadow-lg hover:shadow-gold-500/50 smooth-transition">
+            <button className="px-6 py-3 bg-cranberry text-white font-semibold rounded-[14px] hover:bg-cranberry/90 hover:shadow-premium smooth-transition">
               Subscribe
             </button>
           </div>

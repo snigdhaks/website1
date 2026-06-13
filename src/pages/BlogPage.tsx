@@ -98,7 +98,7 @@ const BlogPage = () => {
               placeholder="Search articles..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-6 py-3 rounded-lg bg-dark-800 border border-white border-opacity-20 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400 focus:ring-2 focus:ring-gold-400 focus:ring-opacity-30 smooth-transition"
+              className="w-full px-6 py-3 rounded-[14px] bg-white border border-gray-100 text-navy placeholder-textgray/60 focus:outline-none focus:border-cranberry focus:ring-2 focus:ring-cranberry/20 smooth-transition"
             />
           </div>
 
@@ -110,8 +110,8 @@ const BlogPage = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-6 py-2 rounded-full font-semibold smooth-transition ${
                   selectedCategory === category
-                    ? 'bg-gradient-gold text-dark-950 shadow-lg shadow-gold-500/50'
-                    : 'glass-card-dark text-gold-400 hover:text-gold-300'
+                    ? 'bg-cranberry text-white shadow-premium'
+                    : 'bg-white text-textgray border border-gray-100 hover:text-cranberry'
                 }`}
               >
                 {category}
@@ -123,13 +123,13 @@ const BlogPage = () => {
         {loading ? (
           <div className="text-center py-12">
             <div className="inline-block animate-spin">
-              <div className="w-12 h-12 border-4 border-gold-500 border-t-transparent rounded-full" />
+              <div className="w-12 h-12 border-4 border-cranberry border-t-transparent rounded-full" />
             </div>
-            <p className="text-gray-400 mt-4">Loading articles...</p>
+            <p className="text-textgray mt-4">Loading articles...</p>
           </div>
         ) : filteredBlogs.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-400 text-lg">
+            <p className="text-textgray text-lg">
               No articles found. Try a different search or category.
             </p>
           </div>
@@ -167,7 +167,6 @@ const BlogPage = () => {
         <Section
           title="Featured Article"
           id="featured"
-          className="bg-gradient-to-r from-primary-900 to-primary-800 bg-opacity-50 rounded-2xl"
         >
           {(() => {
             const featured = blogs[0]
@@ -176,7 +175,7 @@ const BlogPage = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="glass-card-dark p-8 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
+                className="glass-card p-8 md:p-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
               >
                 {featured.coverImage && (
                   <div className="overflow-hidden rounded-lg h-64 md:h-96">
@@ -194,30 +193,30 @@ const BlogPage = () => {
                         {featured.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="text-xs px-2 py-1 bg-gold-500 bg-opacity-20 text-gold-400 rounded-full"
+                            className="text-xs px-2.5 py-1 bg-roseaccent/10 text-roseaccent font-medium rounded-full"
                           >
-                            {tag}
+                            #{tag}
                           </span>
                         ))}
                       </div>
                     )}
                   </div>
-                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                  <h3 className="text-3xl md:text-4xl font-bold text-navy mb-4 font-serif">
                     {featured.title}
                   </h3>
-                  <div className="flex items-center gap-4 text-gray-400 mb-6">
+                  <div className="flex items-center gap-4 text-textgray mb-6">
                     <span>{featured.author}</span>
                     <span>•</span>
                     <span>
                       {new Date(featured.date).toLocaleDateString()}
                     </span>
                   </div>
-                  <p className="text-lg text-gray-300 mb-8 leading-relaxed">
+                  <p className="text-lg text-textgray mb-8 leading-relaxed">
                     {featured.excerpt}
                   </p>
                   <button
                     onClick={() => navigate(`/blog/${featured.id}`)}
-                    className="px-8 py-3 bg-gradient-gold text-dark-950 font-semibold rounded-lg hover:shadow-lg hover:shadow-gold-500/50 smooth-transition"
+                    className="px-8 py-3 bg-cranberry text-white font-semibold rounded-[14px] hover:bg-cranberry/90 smooth-transition hover:shadow-premium"
                   >
                     Read Full Article
                   </button>
@@ -242,46 +241,46 @@ const BlogPage = () => {
           ].map((stat, idx) => {
             const IconComponent = stat.icon
             return (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="glass-card-dark p-8 text-center"
-            >
-              <IconComponent className="mx-auto text-5xl text-pink-500 mb-4" />
-              <div className="text-4xl font-bold text-gradient mb-2">
-                {stat.number}
-              </div>
-              <p className="text-gray-400">{stat.label}</p>
-            </motion.div>
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className="glass-card p-8 text-center"
+              >
+                <IconComponent className="mx-auto text-5xl text-roseaccent mb-4" />
+                <div className="text-4xl font-bold text-gradient mb-2 font-serif">
+                  {stat.number}
+                </div>
+                <p className="text-textgray font-medium">{stat.label}</p>
+              </motion.div>
             )
           })}
         </div>
       </Section>
 
       {/* Newsletter CTA */}
-      <Section className="bg-gradient-to-r from-gold-500 via-gold-600 to-primary-600 bg-opacity-20 rounded-2xl">
+      <Section className="bg-gradient-to-r from-navy via-purpleaccent to-cranberry rounded-[20px] shadow-xl p-8 md:p-16">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="text-center py-12"
         >
-          <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h3 className="text-3xl md:text-4xl font-bold font-serif text-white mb-6">
             Subscribe to Our Blog
           </h3>
-          <p className="text-lg text-gray-300 mb-8">
+          <p className="text-lg text-white/80 mb-8">
             Get the latest articles delivered to your inbox
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 px-4 py-3 rounded-lg bg-dark-800 border border-white border-opacity-20 text-white placeholder-gray-500 focus:outline-none focus:border-gold-400"
+              className="flex-1 px-4 py-3 rounded-[14px] bg-white border border-gray-100 text-navy placeholder-textgray/60 focus:outline-none focus:border-cranberry"
             />
-            <button className="px-6 py-3 bg-gradient-gold text-dark-950 font-semibold rounded-lg hover:shadow-lg hover:shadow-gold-500/50 smooth-transition">
+            <button className="px-6 py-3 bg-cranberry text-white font-semibold rounded-[14px] hover:bg-cranberry/90 hover:shadow-premium smooth-transition">
               Subscribe
             </button>
           </div>
