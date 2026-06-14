@@ -4,8 +4,8 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        - VITE_STRAPI_API_URL=
-        - VITE_STRAPI_TOKEN=
+        - VITE_STRAPI_API_URL=${VITE_STRAPI_API_URL}
+        - VITE_STRAPI_TOKEN=${VITE_STRAPI_TOKEN}
     container_name: rotaract-mec-website
     ports:
       - "80:80"
