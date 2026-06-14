@@ -1,29 +1,19 @@
-version: '3.8'
-
 services:
   rotaract-website:
     build:
       context: .
       dockerfile: Dockerfile
       args:
-        - VITE_STRAPI_API_URL=${VITE_STRAPI_API_URL}
-        - VITE_STRAPI_TOKEN=${VITE_STRAPI_TOKEN}
+        - VITE_STRAPI_API_URL=
+        - VITE_STRAPI_TOKEN=
     container_name: rotaract-mec-website
     ports:
       - "80:80"
-    environment:
-      - NODE_ENV=production
     restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+    depends_on:
+      - rotaract-strapi
     networks:
       - rotaract-network
-    volumes:
-      - ./public:/usr/share/nginx/html/public:ro
 
   rotaract-strapi:
     build:
@@ -32,12 +22,13 @@ services:
     container_name: rotaract-mec-strapi
     ports:
       - "1337:1337"
+    env_file:
+      - ./backend/.env
     environment:
       - NODE_ENV=production
     volumes:
-      - ./backend/public/uploads:/opt/app/public/uploads
-      - ./backend/.tmp:/opt/app/.tmp
-      - ./backend/database:/opt/app/database
+      - strapi_uploads:/app/public/uploads
+      - strapi_data:/app/.tmp
     restart: unless-stopped
     networks:
       - rotaract-network
@@ -45,3 +36,7 @@ services:
 networks:
   rotaract-network:
     driver: bridge
+
+volumes:
+  strapi_uploads:
+  strapi_data:
