@@ -16,7 +16,7 @@ const Footer = () => {
 
   const socialLinks = [
     { icon: FaFacebook, url: '#', label: 'Facebook' },
-    { icon: FaInstagram, url: '#', label: 'Instagram' },
+    { icon: FaInstagram, url: 'https://www.instagram.com/rotaract.mec?igsh=MTR0Ym0yN2J0ZXUzaA==', label: 'Instagram' },
     { icon: FaLinkedin, url: '#', label: 'LinkedIn' },
     { icon: FaTwitter, url: '#', label: 'Twitter' },
   ]

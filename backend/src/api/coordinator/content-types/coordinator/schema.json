@@ -29,11 +29,7 @@
       "type": "text"
     },
     "image": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images"
-      ]
+      "type": "string"
     },
     "social": {
       "type": "json"

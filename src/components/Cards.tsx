@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import React from 'react'
+import React, { useState } from 'react'
 
 interface CardGridProps {
   children: React.ReactNode
@@ -56,31 +56,38 @@ export const CoordinatorCard: React.FC<{
   description?: string
   social?: { facebook?: string; instagram?: string; linkedin?: string }
 }> = ({ image, name, role, department, description, social }) => {
+  const [imageSrc, setImageSrc] = useState(image || '/coordinators/default.png')
+
+  const handleError = () => {
+    setImageSrc('/coordinators/default.png')
+  }
+
   return (
-    <GlassCard>
-      <div className="text-center">
-        {image && (
+    <GlassCard className="h-full flex flex-col justify-between">
+      <div className="text-center flex-grow flex flex-col justify-between">
+        <div>
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="mb-4 overflow-hidden rounded-lg"
+            className="mb-4 overflow-hidden rounded-lg h-[300px] w-full bg-pink-50/50 border border-pink-100 flex items-center justify-center"
           >
             <img
-              src={image}
+              src={imageSrc}
               alt={name}
-              className="w-full h-48 object-cover"
+              onError={handleError}
+              className="w-full h-full object-cover"
             />
           </motion.div>
-        )}
-        <h3 className="text-xl font-bold text-navy mb-1">{name}</h3>
-        <p className="text-roseaccent font-semibold mb-1">{role}</p>
-        {department && (
-          <p className="text-sm text-textgray mb-3">{department}</p>
-        )}
-        {description && (
-          <p className="text-textgray text-sm mb-4 leading-relaxed">{description}</p>
-        )}
+          <h3 className="text-xl font-bold text-navy mb-1">{name}</h3>
+          <p className="text-roseaccent font-semibold mb-1">{role}</p>
+          {department && (
+            <p className="text-sm text-textgray mb-3">{department}</p>
+          )}
+          {description && (
+            <p className="text-textgray text-sm mb-4 leading-relaxed">{description}</p>
+          )}
+        </div>
         {social && (
-          <div className="flex justify-center gap-3 pt-4 border-t border-gray-100">
+          <div className="flex justify-center gap-3 pt-4 border-t border-gray-100 mt-auto">
             {social.facebook && (
               <a
                 href={social.facebook}

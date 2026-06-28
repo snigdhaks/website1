@@ -499,6 +499,8 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::blog.blog'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    subscribersNotified: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
     tags: Schema.Attribute.JSON;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
@@ -524,7 +526,7 @@ export interface ApiCoordinatorCoordinator extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     department: Schema.Attribute.String;
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media<'images'>;
+    image: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -639,6 +641,39 @@ export interface ApiMembershipMembership extends Struct.SingleTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     tagline: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSubscriberSubscriber extends Struct.CollectionTypeSchema {
+  collectionName: 'subscribers';
+  info: {
+    description: 'Newsletter subscribers database';
+    displayName: 'Subscriber';
+    pluralName: 'subscribers';
+    singularName: 'subscriber';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    active: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::subscriber.subscriber'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    subscribedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1162,6 +1197,7 @@ declare module '@strapi/strapi' {
       'api::event.event': ApiEventEvent;
       'api::introduction.introduction': ApiIntroductionIntroduction;
       'api::membership.membership': ApiMembershipMembership;
+      'api::subscriber.subscriber': ApiSubscriberSubscriber;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

@@ -1,4 +1,7 @@
-// import type { Core } from '@strapi/strapi';
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
+import nodemailer from 'nodemailer';
 
 export default {
   /**
@@ -7,7 +10,247 @@ export default {
    *
    * This gives you an opportunity to extend code.
    */
-  register(/* { strapi }: { strapi: Core.Strapi } */) {},
+  register({ strapi }: { strapi: any }) {
+    strapi.documents.use(async (context, next) => {
+      const isPublishingBlog = context.action === 'publish' && context.uid === 'api::blog.blog';
+      const documentId = context.params?.documentId;
+
+      // 1. Intercept subscriber create to set subscribedAt automatically
+      if (context.action === 'create' && context.uid === 'api::subscriber.subscriber') {
+        if (context.params && context.params.data) {
+          context.params.data.subscribedAt = new Date();
+        }
+      }
+
+      // Execute the operation
+      const result = await next();
+
+      // 2. Intercept blog publish action to dispatch newsletter
+      if (isPublishingBlog && documentId) {
+        // Run asynchronously so we do not block the admin panel publish response
+        (async () => {
+          try {
+            console.log(`[Newsletter] Blog article with ID "${documentId}" published. Fetching active subscribers...`);
+            
+            // Fetch the fully populated blog (including coverImage)
+            const blog = await strapi.documents('api::blog.blog').findOne({
+              documentId,
+              populate: ['coverImage'],
+            });
+
+            if (!blog) {
+              console.warn(`[Newsletter] Published blog document with ID ${documentId} not found.`);
+              return;
+            }
+
+            if (blog.subscribersNotified) {
+              console.log(`[Newsletter] Newsletter already sent for blog: ${blog.title}`);
+              return;
+            }
+
+            // Fetch active subscribers
+            const activeSubscribers = await strapi.documents('api::subscriber.subscriber').findMany({
+              filters: { active: true },
+            });
+
+            if (!activeSubscribers || activeSubscribers.length === 0) {
+              console.log('[Newsletter] No active subscribers found. Marking blog as notified.');
+              await strapi.documents('api::blog.blog').update({
+                documentId,
+                data: { subscribersNotified: true },
+              });
+              return;
+            }
+
+            // Setup Nodemailer Brevo SMTP transport
+            const transporter = nodemailer.createTransport({
+              host: process.env.SMTP_HOST || 'smtp-relay.brevo.com',
+              port: parseInt(process.env.SMTP_PORT || '587'),
+              secure: false,
+              auth: {
+                user: process.env.SMTP_USER,
+                pass: process.env.SMTP_PASSWORD,
+              },
+            });
+
+            // Inline organization logo image
+            const logoPath = path.resolve(process.cwd(), '../public/821BEB28-B6DD-4E85-A1EF-C60BA699FE9B.PNG');
+            const attachments: any[] = [];
+            if (fs.existsSync(logoPath)) {
+              attachments.push({
+                filename: 'logo.png',
+                path: logoPath,
+                cid: 'logo',
+              });
+            }
+
+            // Resolve Cover Image URL
+            const backendUrl = process.env.BACKEND_URL || 'http://localhost:1337';
+            let coverImageUrl = '';
+            if (blog.coverImage) {
+              const url = blog.coverImage.url || (blog.coverImage.data && blog.coverImage.data.attributes && blog.coverImage.data.attributes.url);
+              if (url) {
+                coverImageUrl = url.startsWith('http') ? url : `${backendUrl}${url}`;
+              }
+            }
+
+            const coverImageHtml = coverImageUrl
+              ? `<div style="text-align: center; margin-bottom: 24px;"><img src="${coverImageUrl}" alt="Blog Cover" style="width: 100%; max-height: 300px; object-fit: cover; display: block; border-radius: 8px;"></div>`
+              : '';
+
+            const websiteUrl = process.env.WEBSITE_URL || 'http://localhost:5173';
+            const blogLink = `${websiteUrl}/blog/${blog.documentId}`;
+
+            const title = blog.title || '';
+            const excerpt = blog.excerpt || '';
+
+            // Branded HTML email layout
+            const htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Blog Post: ${title}</title>
+  <style>
+    body {
+      font-family: 'Inter', Helvetica, Arial, sans-serif;
+      background-color: #FFF6FA;
+      color: #475569;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px -10px rgba(217, 27, 92, 0.15);
+      border: 1px solid #FFF0F6;
+    }
+    .header {
+      background-color: #0F172A;
+      padding: 24px;
+      text-align: center;
+    }
+    .header img {
+      height: 44px;
+      vertical-align: middle;
+    }
+    .header-text {
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: 700;
+      vertical-align: middle;
+      margin-left: 12px;
+      letter-spacing: 1px;
+      display: inline-block;
+    }
+    .content {
+      padding: 32px;
+    }
+    h1 {
+      color: #0F172A;
+      font-size: 24px;
+      font-weight: 800;
+      margin-top: 0;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+    .excerpt {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #475569;
+      margin-bottom: 28px;
+    }
+    .cta-container {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .cta-button {
+      background-color: #D91B5C;
+      color: #ffffff !important;
+      text-decoration: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-weight: 600;
+      display: inline-block;
+      font-size: 16px;
+    }
+    .footer {
+      background-color: #f8fafc;
+      padding: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: #94a3b8;
+      border-top: 1px solid #f1f5f9;
+      line-height: 1.5;
+    }
+    .footer a {
+      color: #D91B5C;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="cid:logo" alt="Rotaract MEC Logo">
+      <span class="header-text">ROTARACT MEC</span>
+    </div>
+    <div class="content">
+      ${coverImageHtml}
+      <h1>${title}</h1>
+      <p class="excerpt">${excerpt}</p>
+      <div class="cta-container">
+        <a href="${blogLink}" class="cta-button" target="_blank">Read Full Article</a>
+      </div>
+    </div>
+    <div class="footer">
+      <p>You received this because you subscribed to the Rotaract MEC blog updates.</p>
+      <p>&copy; ${new Date().getFullYear()} Rotaract Club of Model Engineering College. All rights reserved.</p>
+    </div>
+  </div>
+</body>
+</html>
+            `;
+
+            // Loop to send individualized emails to each active subscriber
+            for (const subscriber of activeSubscribers) {
+              try {
+                await transporter.sendMail({
+                  from: `"Rotaract Club MEC" <${process.env.SMTP_USER}>`,
+                  to: subscriber.email,
+                  subject: `New Blog Post: ${blog.title}`,
+                  html: htmlContent,
+                  attachments,
+                });
+                console.log(`[Newsletter] Sent notification to: ${subscriber.email}`);
+              } catch (err) {
+                console.error(`[Newsletter] Failed to send email to ${subscriber.email}:`, err);
+              }
+            }
+
+            // Update blog to prevent duplicate mailings
+            await strapi.documents('api::blog.blog').update({
+              documentId,
+              data: {
+                subscribersNotified: true,
+              },
+            });
+            console.log(`[Newsletter] Finished newsletter dispatch. Updated subscribersNotified=true on blog ID: ${documentId}`);
+          } catch (err) {
+            console.error(`[Newsletter] Error during newsletter dispatch process:`, err);
+          }
+        })();
+      }
+
+      return result;
+    });
+  },
+
 
   /**
    * An asynchronous bootstrap function that runs before
@@ -16,5 +259,225 @@ export default {
    * This gives you an opportunity to set up your data model,
    * run jobs, or perform some special logic.
    */
-  bootstrap(/* { strapi }: { strapi: Core.Strapi } */) {},
+  async bootstrap({ strapi }: { strapi: any }) {
+    try {
+      const existingCoords = await strapi.documents('api::coordinator.coordinator').findMany();
+      const needsCoordMigration = existingCoords.length === 0 || !existingCoords.some(c => typeof c.image === 'string' && c.image.startsWith('/coordinators/'));
+
+      if (needsCoordMigration) {
+        console.log('--- Resetting and re-seeding coordinators with static paths ---');
+        for (const c of existingCoords) {
+          await strapi.documents('api::coordinator.coordinator').delete({
+            documentId: c.documentId
+          });
+        }
+
+        const coordinatorsData = [
+          {
+            name: 'Abheerav A Nambiar',
+            role: 'Charter President',
+            instagram: 'https://www.instagram.com/abheerav_a_nambiar/',
+            linkedin: 'https://www.linkedin.com/in/abheerav-anil-a97757328?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+            image: '/coordinators/abheerav-a-nambiar.pdf'
+          },
+          {
+            name: 'John Bethlehem Pallan',
+            role: 'Charter Secretary',
+            instagram: 'https://www.instagram.com/johnbethlehm/',
+            linkedin: 'https://in.linkedin.com/in/johnbethlehempallan',
+            image: '/coordinators/john-bethlehem-pallan.jpg'
+          },
+          {
+            name: 'Nathan Zacharia Saby',
+            role: 'Charter Treasurer',
+            instagram: 'https://www.instagram.com/nathan_zach?igsh=MWhzMTd4dDh1dnkxeQ==',
+            linkedin: 'https://www.linkedin.com/in/nathan-z-saby',
+            image: '/coordinators/nathan-zacharia-saby.jpg'
+          },
+          {
+            name: 'Zayan M S',
+            role: 'Charter Vice President',
+            instagram: 'https://www.instagram.com/zayan_378?igsh=d2s3bmpxbGZoZG8w',
+            linkedin: 'https://www.linkedin.com/in/zayan-ms-558329328?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+            image: '/coordinators/zayan-m-s.jpg'
+          },
+          {
+            name: 'Sherin Rajan Reumah',
+            role: 'Charter Joint Secretary',
+            instagram: 'https://www.instagram.com/reuan0/',
+            linkedin: 'https://www.linkedin.com/in/sherin-rajan-reumah-788a53238?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+            image: '/coordinators/sherin-rajan-reumah.jpg'
+          },
+          {
+            name: 'Ihsan Muhammed K P',
+            role: 'Membership Chair',
+            instagram: 'https://www.instagram.com/_.ih.s.an._?igsh=MXgxN3ppaDF6Y25ldQ==',
+            linkedin: 'https://www.linkedin.com/in/ihsan-muhammed-k-p-a57004329?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+            image: '/coordinators/insan-muhammed-k-p.jpg'
+          },
+          {
+            name: 'Aditya Saji',
+            role: 'Sergeant at Arms',
+            instagram: 'https://www.instagram.com/ramu_the_noob?igsh=MWlrcDBjZTgzN2pwbw==',
+            linkedin: 'https://www.linkedin.com/in/aditya-saji-69643a284',
+            image: '/coordinators/aditya-saji.jpeg'
+          },
+          {
+            name: 'Vyshnav S',
+            role: 'Club Service Chair',
+            instagram: 'https://www.instagram.com/vyshnav_7_7_7_5?igsh=dnoyamxyOWZrc28y',
+            linkedin: 'https://www.linkedin.com/in/vyshnav-shyam-276a50329?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+            image: '/coordinators/vyshnav-s.jpg'
+          },
+          {
+            name: 'Jesuin Peter',
+            role: 'Community Service Chair',
+            instagram: 'https://www.instagram.com/hey_jesuin?igsh=MWl2eHhoNnljMGhtcQ==',
+            linkedin: 'https://www.linkedin.com/in/jesuin-peter-909013352?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+            image: ''
+          },
+          {
+            name: 'Ihsan Sanoj',
+            role: 'Professional Service Chair',
+            instagram: 'https://www.instagram.com/ihsansanoj10/',
+            linkedin: 'https://www.linkedin.com/in/ihsan-sanoj-6a933a332/',
+            image: '/coordinators/ihsan-sanoj.HEIC'
+          },
+          {
+            name: 'Aaron Paul',
+            role: 'International Service Chair',
+            instagram: 'https://www.instagram.com/aaronpaul.xo/',
+            linkedin: 'https://www.linkedin.com/in/aaron-paul-762248328/',
+            image: '/coordinators/aaron-paul.HEIC'
+          },
+          {
+            name: 'Akash Chem J',
+            role: 'Club Editor',
+            instagram: 'https://www.instagram.com/akash_c.j?igsh=ZDJyeDE5YmJqYTh0',
+            linkedin: 'https://www.linkedin.com/in/akash-chem-j-863925272?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+            image: '/coordinators/akas-chem-j.webp'
+          },
+          {
+            name: 'Hrishikesh S Kumar',
+            role: 'Social Media Chair',
+            instagram: 'https://www.instagram.com/the_hrishi107?igsh=NnExam83OGYwZTU2',
+            linkedin: 'https://www.linkedin.com/in/hrishikesh-s-kumar-7bb14b329?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+            image: '/coordinators/hrishikesh-s-kumar.jpg'
+          },
+          {
+            name: 'Alestor Aldous',
+            role: 'Web Service Chair',
+            instagram: 'http://instagram.com/alestor_dev',
+            linkedin: 'https://www.linkedin.com/in/alestor123/',
+            image: '/coordinators/alestor-aldous.jpg'
+          }
+        ];
+
+        for (const coord of coordinatorsData) {
+          console.log(`Seeding coordinator: ${coord.name} with static path`);
+          await strapi.documents('api::coordinator.coordinator').create({
+            data: {
+              name: coord.name,
+              role: coord.role,
+              department: '',
+              year: '',
+              description: '',
+              image: coord.image,
+              social: {
+                instagram: coord.instagram || '',
+                linkedin: coord.linkedin || '',
+                facebook: ''
+              }
+            },
+            status: 'published'
+          });
+        }
+        console.log('--- Coordinators seeding completed ---');
+      } else {
+        console.log(`Coordinators already migrated. Skipping.`);
+      }
+
+      // Seed introduction single type
+      const introCount = await strapi.documents('api::introduction.introduction').count();
+      if (introCount === 0) {
+        console.log('--- Seeding introduction single type ---');
+        await strapi.documents('api::introduction.introduction').create({
+          data: {
+            title: 'About Rotaract Club of MEC Kochi',
+            vision: 'Empowering youth to become change-makers, fostering leadership, and building inclusive, sustainable communities through impactful service and global understanding.',
+            mission: 'To provide opportunities for Model Engineering College students to develop leadership skills, professional capabilities, and personal integrity through community service, innovative teamwork, and international fellowship.',
+            purpose: 'Rotaract Club of Government Model Engineering College, Kochi (Rotaract MEC) is a community-driven student organization. We bring together energetic students who want to develop their professional and leadership skills while making a real difference in the lives of people around us. Our activities span educational support, environment conservation, technical skill development, and community welfare, all while cultivating lifelong friendships.',
+            history: 'Officially installed in 2025, the Rotaract Club of Model Engineering College (Rotaract MEC) was established to channel student potential into meaningful societal change. Our foundation rests on the pillars of fellowship, leadership, and hands-on service. Through impact-driven community outreach, tailored professional development initiatives, and collaborative projects, we empower members to become proactive changemakers and empathetic leaders. As we expand our reach and adapt to new challenges, the club continues to grow dynamically, always guided by the timeless Rotary motto, "Service Above Self."',
+            values: [
+              {
+                title: 'Service Above Self',
+                description: 'Nurturing a spirit of volunteerism and placing community service at the core of all our initiatives.'
+              },
+              {
+                title: 'Leadership',
+                description: 'Empowering students with opportunities to take charge, guide teams, and develop project management skills.'
+              },
+              {
+                title: 'Integrity',
+                description: 'Fostering transparency, trust, and ethical responsibility in our relationships and execution of project activities.'
+              },
+              {
+                title: 'Diversity',
+                description: 'Welcoming students from all academic streams, interests, and backgrounds to foster a rich, inclusive environment.'
+              },
+              {
+                title: 'Collaboration',
+                description: 'Working hand-in-hand with Rotarians, other Rotaract clubs, local communities, and organizations for larger impact.'
+              },
+              {
+                title: 'Innovation',
+                description: 'Leveraging engineering expertise and creative design to create modern solutions for social and local problems.'
+              }
+            ]
+          },
+          status: 'published'
+        });
+        console.log('--- Introduction seeding completed ---');
+      } else {
+        console.log(`Introduction table already contains ${introCount} entries. Updating history...`);
+        const intros = await strapi.documents('api::introduction.introduction').findMany();
+        if (intros && intros.length > 0) {
+          await strapi.documents('api::introduction.introduction').update({
+            documentId: intros[0].documentId,
+            data: {
+              history: 'Officially installed in 2025, the Rotaract Club of Model Engineering College (Rotaract MEC) was established to channel student potential into meaningful societal change. Our foundation rests on the pillars of fellowship, leadership, and hands-on service. Through impact-driven community outreach, tailored professional development initiatives, and collaborative projects, we empower members to become proactive changemakers and empathetic leaders. As we expand our reach and adapt to new challenges, the club continues to grow dynamically, always guided by the timeless Rotary motto, "Service Above Self."',
+            }
+          });
+          console.log('--- Introduction history updated successfully ---');
+        }
+      }
+
+      // Ensure public role has access to create subscriber submissions
+      const publicRole = await strapi.query('plugin::users-permissions.role').findOne({
+        where: { type: 'public' }
+      });
+
+      if (publicRole) {
+        const existingPermission = await strapi.query('plugin::users-permissions.permission').findOne({
+          where: {
+            action: 'api::subscriber.subscriber.create',
+            role: publicRole.id,
+          },
+        });
+
+        if (!existingPermission) {
+          await strapi.query('plugin::users-permissions.permission').create({
+            data: {
+              action: 'api::subscriber.subscriber.create',
+              role: publicRole.id,
+            },
+          });
+          console.log('--- Automatically enabled public create permission for subscriber API ---');
+        }
+      }
+    } catch (err: any) {
+      console.error('Error during database seeding/permission assignment:', err);
+    }
+  },
 };
+

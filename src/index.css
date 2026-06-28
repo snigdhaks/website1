@@ -8,6 +8,10 @@
   @apply antialiased;
 }
 
+.about-page h1, .about-page h2 {
+  font-family: Didot, 'Didot LT STD', 'Hoefler Text', Garamond, 'Times New Roman', serif !important;
+}
+
 html {
   scroll-behavior: smooth;
 }

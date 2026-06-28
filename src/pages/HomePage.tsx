@@ -63,7 +63,6 @@ const HomePage = () => {
         description="Empowering young leaders to make a positive impact through community service and meaningful engagement."
         cta={[
           { label: 'Explore Events', href: '/events' },
-          { label: 'Join Us', href: '/membership' },
         ]}
       >
         <motion.div
@@ -270,38 +269,7 @@ const HomePage = () => {
         </Section>
       )}
 
-      {/* CTA Section */}
-      <Section className="bg-gradient-to-r from-navy via-purpleaccent to-cranberry rounded-[20px] shadow-xl p-8 md:p-16">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          className="text-center py-12"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold font-serif text-white mb-6">
-            Ready to Make a Difference?
-          </h2>
-          <p className="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-            Join Rotaract Club MEC and become part of a community dedicated to
-            service, leadership, and fellowship.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              label="Become a Member"
-              href="/membership"
-              variant="primary"
-              size="lg"
-            />
-            <Button
-              label="Contact Us"
-              href="mailto:rotaract@mec.ac.in"
-              variant="outline"
-              size="lg"
-              className="border-white text-white hover:bg-white hover:text-navy"
-            />
-          </div>
-        </motion.div>
-      </Section>
+
     </div>
   )
 }

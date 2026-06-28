@@ -11,7 +11,6 @@ const Navbar = () => {
     { label: 'Home', path: '/' },
     { label: 'About', path: '/introduction' },
     { label: 'Coordinators', path: '/coordinators' },
-    { label: 'Membership', path: '/membership' },
     { label: 'Activities', path: '/activities' },
     { label: 'Events', path: '/events' },
     { label: 'Blog', path: '/blog' },
@@ -52,42 +51,28 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-1">
-            {navItems
-              .filter((item) => item.path !== '/membership')
-              .map((item) => (
-                <Link key={item.path} to={item.path}>
-                  <button
-                    className={`px-4 py-2 rounded-lg smooth-transition relative font-semibold text-sm ${
-                      isActive(item.path)
-                        ? 'text-cranberry'
-                        : 'text-textgray hover:text-cranberry'
-                    }`}
-                    style={{ fontFamily: "'Inter', sans-serif" }}
-                  >
-                    {item.label}
-                    {isActive(item.path) && (
-                      <motion.div
-                        layoutId="underline"
-                        className="absolute bottom-0 left-0 right-0 h-1 bg-cranberry rounded-t-lg"
-                        initial={false}
-                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                  </button>
-                </Link>
-              ))}
-            
-            {/* Join Us CTA Button */}
-            <Link to="/membership" className="ml-4">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-5 py-2.5 bg-cranberry text-white font-semibold text-sm rounded-[14px] shadow-sm hover:bg-cranberry/90 smooth-transition hover:shadow-premium"
-                style={{ fontFamily: "'Inter', sans-serif" }}
-              >
-                Join Us
-              </motion.button>
-            </Link>
+            {navItems.map((item) => (
+              <Link key={item.path} to={item.path}>
+                <button
+                  className={`px-4 py-2 rounded-lg smooth-transition relative font-semibold text-sm ${
+                    isActive(item.path)
+                      ? 'text-cranberry'
+                      : 'text-textgray hover:text-cranberry'
+                  }`}
+                  style={{ fontFamily: "'Inter', sans-serif" }}
+                >
+                  {item.label}
+                  {isActive(item.path) && (
+                    <motion.div
+                      layoutId="underline"
+                      className="absolute bottom-0 left-0 right-0 h-1 bg-cranberry rounded-t-lg"
+                      initial={false}
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                </button>
+              </Link>
+            ))}
           </div>
 
           {/* Mobile Menu Button */}
@@ -117,29 +102,18 @@ const Navbar = () => {
             <div className="px-4 py-4 space-y-2">
               {navItems.map((item) => (
                 <motion.div key={item.path} variants={itemVariants}>
-                  {item.path === '/membership' ? (
-                    <Link
-                      to={item.path}
-                      onClick={() => setIsOpen(false)}
-                      className="block text-center px-4 py-3 bg-cranberry text-white rounded-[14px] smooth-transition font-semibold hover:bg-cranberry/90"
-                      style={{ fontFamily: "'Inter', sans-serif" }}
-                    >
-                      Join Us
-                    </Link>
-                  ) : (
-                    <Link
-                      to={item.path}
-                      onClick={() => setIsOpen(false)}
-                      className={`block px-4 py-3 rounded-lg smooth-transition font-semibold ${
-                        isActive(item.path)
-                          ? 'bg-blush text-cranberry'
-                          : 'text-textgray hover:bg-blush hover:text-cranberry'
-                      }`}
-                      style={{ fontFamily: "'Inter', sans-serif" }}
-                    >
-                      {item.label}
-                    </Link>
-                  )}
+                  <Link
+                    to={item.path}
+                    onClick={() => setIsOpen(false)}
+                    className={`block px-4 py-3 rounded-lg smooth-transition font-semibold ${
+                      isActive(item.path)
+                        ? 'bg-blush text-cranberry'
+                        : 'text-textgray hover:bg-blush hover:text-cranberry'
+                    }`}
+                    style={{ fontFamily: "'Inter', sans-serif" }}
+                  >
+                    {item.label}
+                  </Link>
                 </motion.div>
               ))}
             </div>

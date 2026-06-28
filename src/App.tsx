@@ -7,7 +7,6 @@ import Footer from './components/Footer'
 import HomePage from './pages/HomePage'
 import IntroductionPage from './pages/IntroductionPage'
 import CoordinatorsPage from './pages/CoordinatorsPage'
-import MembershipPage from './pages/MembershipPage'
 import ActivitiesPage from './pages/ActivitiesPage'
 import EventsPage from './pages/EventsPage'
 import BlogPage from './pages/BlogPage'
@@ -47,7 +46,6 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/introduction" element={<IntroductionPage />} />
                 <Route path="/coordinators" element={<CoordinatorsPage />} />
-                <Route path="/membership" element={<MembershipPage />} />
                 <Route path="/activities" element={<ActivitiesPage />} />
                 <Route path="/events" element={<EventsPage />} />
                 <Route path="/blog" element={<BlogPage />} />
