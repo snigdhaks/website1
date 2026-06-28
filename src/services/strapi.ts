@@ -48,19 +48,36 @@ export function normalizeStrapiArray<T>(response: any): T[] {
   return []
 }
 
-export async function fetchStrapi(endpoint: string): Promise<any> {
+export async function fetchStrapi(endpoint: string, options: RequestInit = {}): Promise<any> {
   if (!isStrapiEnabled()) return null
 
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
+    ...(options.headers as Record<string, string>),
   }
   if (STRAPI_TOKEN) {
     headers['Authorization'] = `Bearer ${STRAPI_TOKEN}`
   }
 
-  const response = await fetch(`${STRAPI_API_URL}${endpoint}`, { headers })
+  const response = await fetch(`${STRAPI_API_URL}${endpoint}`, {
+    ...options,
+    headers,
+  })
+
   if (!response.ok) {
-    throw new Error(`Strapi request failed: ${response.statusText}`)
+    let errorMessage = `Strapi request failed: ${response.statusText}`
+    try {
+      const errorJson = await response.json()
+      if (errorJson && errorJson.error && errorJson.error.message) {
+        errorMessage = errorJson.error.message
+      } else if (errorJson && errorJson.message) {
+        errorMessage = errorJson.message
+      }
+    } catch (_) {
+      // Ignore JSON parsing failure
+    }
+    throw new Error(errorMessage)
   }
   return await response.json()
 }
+
