@@ -131,3 +131,6 @@ dist
 build
 .strapi-updater.json
 .strapi-cloud.json
+
+# Allow checking in the data export archive
+!export-data.tar.gz

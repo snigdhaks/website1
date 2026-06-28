@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "setup": "node scripts/setup.cjs",
     "dev": "concurrently \"vite\" \"npm run strapi\"",
     "strapi": "npm --prefix backend run develop",
     "build": "tsc -b && vite build",
