@@ -513,7 +513,7 @@ export interface ApiCoordinatorCoordinator extends Struct.CollectionTypeSchema {
   collectionName: 'coordinators';
   info: {
     description: '';
-    displayName: 'Coordinator';
+    displayName: 'Member';
     pluralName: 'coordinators';
     singularName: 'coordinator';
   };

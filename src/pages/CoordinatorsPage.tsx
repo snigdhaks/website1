@@ -9,9 +9,9 @@ import { Coordinator } from '@/types'
 
 const CoordinatorsPage = () => {
   useSEO({
-    title: 'Coordinators',
-    description: 'Meet the coordinators of Rotaract Club MEC Thrikkakara - leaders dedicated to service and community engagement.',
-    keywords: 'Coordinators, Leadership, Rotaract MEC, Team',
+    title: 'Members',
+    description: 'Meet the members of Rotaract Club MEC Thrikkakara - leaders dedicated to service and community engagement.',
+    keywords: 'Members, Leadership, Rotaract MEC, Team',
     ogDescription: 'Meet the leadership team of Rotaract Club MEC Thrikkakara.',
   })
   const [coordinators, setCoordinators] = useState<Coordinator[]>([])
@@ -49,7 +49,7 @@ const CoordinatorsPage = () => {
   return (
     <div className="min-h-screen pt-20">
       <PageHeader
-        title="Our Coordinators"
+        title="Our Members"
         subtitle="Meet the Leaders"
         description="Dedicated individuals driving our mission of service and leadership"
       />
@@ -60,11 +60,11 @@ const CoordinatorsPage = () => {
             <div className="inline-block animate-spin">
               <div className="w-12 h-12 border-4 border-cranberry border-t-transparent rounded-full" />
             </div>
-            <p className="text-textgray mt-4">Loading coordinators...</p>
+            <p className="text-textgray mt-4">Loading members...</p>
           </div>
         ) : coordinators.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-textgray text-lg">No coordinators found</p>
+            <p className="text-textgray text-lg">No members found</p>
           </div>
         ) : (
           <motion.div
@@ -107,7 +107,7 @@ const CoordinatorsPage = () => {
               Servant Leadership
             </h3>
             <p className="text-textgray leading-relaxed">
-              Our coordinators embody the principle of servant leadership,
+              Our members embody the principle of servant leadership,
               prioritizing the needs of the community and members. They lead by
               example, demonstrating commitment and dedication in every project.
             </p>
@@ -124,7 +124,7 @@ const CoordinatorsPage = () => {
             </h3>
             <p className="text-textgray leading-relaxed">
               We believe in collaborative decision-making where every voice is
-              heard and valued. Together, our coordinators work towards creating
+              heard and valued. Together, our members work towards creating
               opportunities for growth and positive change.
             </p>
           </motion.div>
@@ -132,7 +132,7 @@ const CoordinatorsPage = () => {
       </Section>
 
       {/* Roles and Responsibilities */}
-      <Section title="Coordinator Roles" id="roles">
+      <Section title="Member Roles" id="roles">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             {
@@ -221,7 +221,7 @@ const CoordinatorsPage = () => {
           </h3>
           <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
             If you have the passion and dedication to lead, we encourage you to
-            apply for a coordinator position in our next term.
+            apply for a member position in our next term.
           </p>
           <a
             href="#"

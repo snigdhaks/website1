@@ -9,7 +9,7 @@ const Footer = () => {
   const footerLinks = [
     { label: 'Home', path: '/' },
     { label: 'About', path: '/introduction' },
-    { label: 'Coordinators', path: '/coordinators' },
+    { label: 'Members', path: '/coordinators' },
     { label: 'Events', path: '/events' },
     { label: 'Blog', path: '/blog' },
   ]
@@ -17,7 +17,7 @@ const Footer = () => {
   const socialLinks = [
     { icon: FaFacebook, url: '#', label: 'Facebook' },
     { icon: FaInstagram, url: 'https://www.instagram.com/rotaract.mec?igsh=MTR0Ym0yN2J0ZXUzaA==', label: 'Instagram' },
-    { icon: FaLinkedin, url: '#', label: 'LinkedIn' },
+    { icon: FaLinkedin, url: 'https://www.linkedin.com/in/rotaract-mec-461855412/', label: 'LinkedIn' },
     { icon: FaTwitter, url: '#', label: 'Twitter' },
   ]
 
