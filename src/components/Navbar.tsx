@@ -45,7 +45,7 @@ const Navbar = () => {
               <img src="/821BEB28-B6DD-4E85-A1EF-C60BA699FE9B.PNG" alt="Logo" className="w-11 h-11 object-contain" />
             </div>
             <span className="hidden sm:block text-2xl font-bold text-navy" style={{ fontFamily: "'Inter', sans-serif" }}>
-              ROTARACT
+              Rotaract MEC
             </span>
           </Link>
 
@@ -54,11 +54,10 @@ const Navbar = () => {
             {navItems.map((item) => (
               <Link key={item.path} to={item.path}>
                 <button
-                  className={`px-4 py-2 rounded-lg smooth-transition relative font-semibold text-sm ${
-                    isActive(item.path)
-                      ? 'text-cranberry'
-                      : 'text-textgray hover:text-cranberry'
-                  }`}
+                  className={`px-4 py-2 rounded-lg smooth-transition relative font-semibold text-sm ${isActive(item.path)
+                    ? 'text-cranberry'
+                    : 'text-textgray hover:text-cranberry'
+                    }`}
                   style={{ fontFamily: "'Inter', sans-serif" }}
                 >
                   {item.label}
@@ -105,11 +104,10 @@ const Navbar = () => {
                   <Link
                     to={item.path}
                     onClick={() => setIsOpen(false)}
-                    className={`block px-4 py-3 rounded-lg smooth-transition font-semibold ${
-                      isActive(item.path)
-                        ? 'bg-blush text-cranberry'
-                        : 'text-textgray hover:bg-blush hover:text-cranberry'
-                    }`}
+                    className={`block px-4 py-3 rounded-lg smooth-transition font-semibold ${isActive(item.path)
+                      ? 'bg-blush text-cranberry'
+                      : 'text-textgray hover:bg-blush hover:text-cranberry'
+                      }`}
                     style={{ fontFamily: "'Inter', sans-serif" }}
                   >
                     {item.label}
