@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import React, { useState } from 'react'
+import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa'
 
 interface CardGridProps {
   children: React.ReactNode
@@ -87,29 +88,32 @@ export const CoordinatorCard: React.FC<{
           )}
         </div>
         {social && (
-          <div className="flex justify-center gap-3 pt-4 border-t border-gray-100 mt-auto">
+          <div className="flex justify-center gap-4 pt-4 border-t border-gray-100 mt-auto">
             {social.facebook && (
               <a
                 href={social.facebook}
-                className="text-textgray hover:text-roseaccent smooth-transition font-medium"
+                className="text-textgray hover:text-roseaccent smooth-transition hover:scale-110 transform flex items-center justify-center"
+                aria-label="Facebook"
               >
-                Facebook
+                <FaFacebook size={22} />
               </a>
             )}
             {social.instagram && (
               <a
                 href={social.instagram}
-                className="text-textgray hover:text-roseaccent smooth-transition font-medium"
+                className="text-textgray hover:text-roseaccent smooth-transition hover:scale-110 transform flex items-center justify-center"
+                aria-label="Instagram"
               >
-                Instagram
+                <FaInstagram size={22} />
               </a>
             )}
             {social.linkedin && (
               <a
                 href={social.linkedin}
-                className="text-textgray hover:text-roseaccent smooth-transition font-medium"
+                className="text-textgray hover:text-roseaccent smooth-transition hover:scale-110 transform flex items-center justify-center"
+                aria-label="LinkedIn"
               >
-                LinkedIn
+                <FaLinkedin size={22} />
               </a>
             )}
           </div>
