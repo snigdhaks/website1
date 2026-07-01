@@ -208,8 +208,8 @@ const ActivitiesPage = () => {
               icon: HiTag,
             },
             {
-              number: '500+',
-              label: 'Lives Impacted',
+              number: '3+',
+              label: 'Life Chaning Events',
               icon: HiHeart,
             },
           ].map((stat, idx) => {

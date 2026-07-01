@@ -452,27 +452,43 @@ export default {
         }
       }
 
-      // Ensure public role has access to create subscriber submissions
+      // Ensure public role has access to read public content and create submissions
       const publicRole = await strapi.query('plugin::users-permissions.role').findOne({
         where: { type: 'public' }
       });
 
       if (publicRole) {
-        const existingPermission = await strapi.query('plugin::users-permissions.permission').findOne({
-          where: {
-            action: 'api::subscriber.subscriber.create',
-            role: publicRole.id,
-          },
-        });
+        const actionsToEnable = [
+          'api::subscriber.subscriber.create',
+          'api::activity.activity.find',
+          'api::activity.activity.findOne',
+          'api::blog.blog.find',
+          'api::blog.blog.findOne',
+          'api::coordinator.coordinator.find',
+          'api::coordinator.coordinator.findOne',
+          'api::event.event.find',
+          'api::event.event.findOne',
+          'api::introduction.introduction.find',
+          'api::membership.membership.create'
+        ];
 
-        if (!existingPermission) {
-          await strapi.query('plugin::users-permissions.permission').create({
-            data: {
-              action: 'api::subscriber.subscriber.create',
+        for (const action of actionsToEnable) {
+          const existingPermission = await strapi.query('plugin::users-permissions.permission').findOne({
+            where: {
+              action,
               role: publicRole.id,
             },
           });
-          console.log('--- Automatically enabled public create permission for subscriber API ---');
+
+          if (!existingPermission) {
+            await strapi.query('plugin::users-permissions.permission').create({
+              data: {
+                action,
+                role: publicRole.id,
+              },
+            });
+            console.log(`--- Automatically enabled public permission for ${action} ---`);
+          }
         }
       }
     } catch (err: any) {
