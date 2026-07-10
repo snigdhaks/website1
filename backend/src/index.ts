@@ -1,6 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import os from 'os';
 import nodemailer from 'nodemailer';
 
 async function getActiveSubscribers(strapi: any) {
@@ -57,7 +56,6 @@ async function sendEmails(
   const senderEmail = process.env.SMTP_FROM || 'snigdhasudheesh662@gmail.com';
   for (const subscriber of activeSubscribers) {
     try {
-      console.log("[Newsletter] SMTP User:", process.env.SMTP_USER);
       console.log("[Newsletter] Sender Email:", senderEmail);
       console.log("[Newsletter] Sending TO:", subscriber.email);
 
