@@ -41,6 +41,13 @@ function cleanRecord(record) {
       val = val.replace('/uploads/', '/assets/');
     }
     
+    // Try to parse stringified JSON arrays/objects
+    if (typeof val === 'string' && (val.startsWith('[') || val.startsWith('{'))) {
+      try {
+        val = JSON.parse(val);
+      } catch (e) {}
+    }
+    
     const camelKey = snakeToCamel(key);
     cleaned[camelKey] = val;
   }
