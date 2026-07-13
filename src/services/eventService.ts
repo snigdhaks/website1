@@ -1,5 +1,5 @@
 import { Event } from '@/types'
-import { events } from '@/data/staticContent'
+import { events } from '@/data/events'
 
 export const eventService = {
   async getAll(): Promise<Event[]> {

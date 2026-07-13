@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import PageHeader from '@/components/PageHeader'
 import { Section } from '@/components/Common'
 import { useSEO } from '@/hooks'
-import { introductions } from '@/data/staticContent'
+import { introductions } from '@/data/introductions'
 import {
   FaHandHoldingHeart,
   FaBriefcase,

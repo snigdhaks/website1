@@ -128,7 +128,8 @@ const CoordinatorsPage = () => {
                     description={coordinator.description}
                     image={coordinator.image}
                     social={coordinator.social}
-                    imageFit={coordinator.name === 'Minu K K' ? 'contain' : 'cover'}
+                    imageFit="cover"
+                    imagePosition={coordinator.name === 'Minu K K' ? 'center 15%' : undefined}
                   />
                 </motion.div>
               ))}

@@ -1,5 +1,5 @@
 import { Activity } from '@/types'
-import { activities } from '@/data/staticContent'
+import { activities } from '@/data/activities'
 
 export const activityService = {
   async getAll(): Promise<Activity[]> {

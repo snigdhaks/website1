@@ -1,5 +1,5 @@
 import { Coordinator } from '@/types'
-import { coordinators } from '@/data/staticContent'
+import { coordinators } from '@/data/coordinators'
 
 export const coordinatorService = {
   async getAll(): Promise<Coordinator[]> {

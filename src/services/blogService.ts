@@ -1,5 +1,5 @@
 import { Blog } from '@/types'
-import { blogs } from '@/data/staticContent'
+import { blogs } from '@/data/blogs'
 
 export const blogService = {
   async getAll(): Promise<Blog[]> {
