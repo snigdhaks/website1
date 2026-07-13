@@ -735,7 +735,7 @@ export default {
             documentId: intros[0].documentId,
             data: {
               vision: 'Empower youth to become changemakers. Build inclusive and sustainable communities. Create lasting impact through service and leadership.',
-              history: 'Officially installed in 2025, the Rotaract Club of Model Engineering College (Rotaract MEC) was established to channel student potential into meaningful societal change. Our foundation rests on the pillars of fellowship, leadership, and hands-on service. Through impact-driven community outreach, tailored professional development initiatives, and collaborative projects, we empower members to become proactive changemakers and empathetic leaders. As we expand our reach and adapt to new challenges, the club continues to grow dynamically, always guided by the timeless Rotary motto, "Service Above Self."',
+              history: 'Officially installed in 2026, the Rotaract Club of Model Engineering College (Rotaract MEC) was established to channel student potential into meaningful societal change. Our foundation rests on the pillars of fellowship, leadership, and hands-on service. Through impact-driven community outreach, tailored professional development initiatives, and collaborative projects, we empower members to become proactive changemakers and empathetic leaders. As we expand our reach and adapt to new challenges, the club continues to grow dynamically, always guided by the timeless Rotary motto, "Service Above Self."',
             }
           });
           console.log('--- Introduction vision and history updated successfully ---');
